@@ -1,10 +1,10 @@
       ' initialize the loop counter
       test = "Wizard Petra"
-      t = {health}
       n = {name}
+      t = {health}
       print n+" health = "+t
       move 10
-      count = 3
+      count = 1
       ' stop looping if we're done
 top:  if count = 0 then end
       print "Hello, world! "  + test

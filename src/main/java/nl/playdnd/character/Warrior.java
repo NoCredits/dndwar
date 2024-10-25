@@ -20,12 +20,13 @@ public class Warrior extends PlayerCharacter {
         element.setBackground(Color.red);
         setElement(element);
 
+        System.out.println("Warrior");
         interpret();
 
         // element = Dasic.getArena().addElement(5, 5);
         // element.setBackground(Color.red);
         try {
-            Thread.sleep(1000);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -41,7 +42,7 @@ public class Warrior extends PlayerCharacter {
 
     @Override
     public DasicAI initDasic() {
-        return new DasicAI("src/main/resources/das/hellos.das");
+        return new DasicAI("src/main/resources/das/warrior.das");
 
     }
 

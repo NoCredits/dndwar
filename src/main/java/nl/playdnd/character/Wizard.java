@@ -19,10 +19,11 @@ public class Wizard extends PlayerCharacter {
         element.setBackground(Color.blue);
         setElement(element);
 
+        System.out.println("Wizard");
         interpret();
 
         try {
-            Thread.sleep(1000);
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();

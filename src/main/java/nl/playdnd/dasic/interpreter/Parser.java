@@ -164,12 +164,16 @@ import nl.playdnd.dasic.value.StringValue;
                 return expression;
             } else if (match(TokenType.LEFT_CURLYBRACE)) {
                 // The contents of a curlybraced is an inline variable
-                //Expression expression = expression();
                 expression();  //consumes the expression
-                //InlineValue inline =new InlineValue(last(1).text);
-                InlineValue inline =new InlineValue( inlineValues.getStringValue( (last(1).text)) );
+                var val = inlineValues.getValue( (last(1).text));
+                //System.out.println("val= "+val);
                 consume(TokenType.RIGHT_CURLYBRACE);
-                return inline;
+                
+                if (val instanceof String) return new StringValue((String) val);
+                if (val instanceof Integer) return new NumberValue((int) val);
+                if (val instanceof Double) return new NumberValue((double) val);
+                
+                return new StringValue(null);
             }
             throw new Error("Couldn't parse :(");
         }

@@ -18,6 +18,7 @@ public class Main {
 
         // Dasic.getArena().addElement(3, 3, java.awt.Color);
         Warrior rygar = new Warrior("Rygar", 10, 4);
+        System.out.println();
         Wizard gandalf = new Wizard("Gandalf", 8, 2);
 
         // Place characters on the map
@@ -28,37 +29,37 @@ public class Main {
         rygar.setPosition(new Point(0, 0));
         gandalf.setPosition(new Point(4, 4));
 
-        System.out.println("Initial Map:");
-        battleMap.displayMap();
+        //System.out.println("Initial Map:");
+        //battleMap.displayMap();
 
-        int sx = 2;
-        do {
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            // Move Aragorn closer to Gandalf
-            battleMap.moveCharacter(rygar, 2 + sx, 2);
-            // rygar.setPosition(new Point(2, 2));
+        // int sx = 2;
+        // do {
+        //     try {
+        //         Thread.sleep(1000);
+        //     } catch (InterruptedException e) {
+        //         // TODO Auto-generated catch block
+        //         e.printStackTrace();
+        //     }
+        //     // Move Aragorn closer to Gandalf
+        //     battleMap.moveCharacter(rygar, 2 + sx, 2);
+        //     // rygar.setPosition(new Point(2, 2));
 
-            // Move Gandalf closer to Aragorn
-            battleMap.moveCharacter(gandalf, 3 + sx, 3);
-            // gandalf.setPosition(new Point(3, 3));
+        //     // Move Gandalf closer to Aragorn
+        //     battleMap.moveCharacter(gandalf, 3 + sx, 3);
+        //     // gandalf.setPosition(new Point(3, 3));
 
-            // Display the updated map
-            System.out.println("\nAfter Moving:");
-            battleMap.displayMap();
-            // Wizard casts Fireball on Fighter
-            gandalf.attack(rygar);
+        //     // Display the updated map
+        //     System.out.println("\nAfter Moving:");
+        //     //battleMap.displayMap();
+        //     // Wizard casts Fireball on Fighter
+        //     gandalf.attack(rygar);
 
-            // Fighter attacks Wizard
-            rygar.attack(gandalf);
+        //     // Fighter attacks Wizard
+        //     rygar.attack(gandalf);
 
-            // Wizard casts Lightning Bolt on Fi
+        //     // Wizard casts Lightning Bolt on Fi
 
-        } while (sx++ < 10);
+        // } while (sx++ < 3);
 
     }
 

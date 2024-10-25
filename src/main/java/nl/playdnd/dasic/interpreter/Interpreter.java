@@ -1,6 +1,7 @@
 package nl.playdnd.dasic.interpreter;
 
 import java.util.*;
+import java.util.stream.*;
 
 
 import nl.playdnd.character.Vars;
@@ -68,7 +69,6 @@ public class Interpreter {
                 TokenType.LEFT_PAREN, TokenType.RIGHT_PAREN,
                 TokenType.LEFT_CURLYBRACE, TokenType.RIGHT_CURLYBRACE
         };
-
         // Scan through the code one character at a time, building up the list
         // of tokens.
         for (int i = 0; i < source.length(); i++) {
@@ -141,6 +141,7 @@ public class Interpreter {
         // HACK: Silently ignore any in-progress token when we run out of
         // characters. This means that, for example, if a script has a string
         // that's missing the closing ", it will just ditch it.
+        for (Token t:tokens) System.out.println(t.text+" "+t.type);;
         return tokens;
     }
 

@@ -13,9 +13,9 @@ import nl.playdnd.dasic.value.Value;
             this.name = name;
         }
         
-        public Value evaluate(SourceCode globals) {
-            if (globals.getVariables().containsKey(name)) {
-                return globals.getVariables().get(name);
+        public Value evaluate(SourceCode sourceCode) {
+            if (sourceCode.getVariables().containsKey(name)) {
+                return sourceCode.getVariables().get(name);
             }
             return new NumberValue(0);
         }

@@ -6,6 +6,11 @@ import nl.playdnd.dasic.interpreter.SourceCode;
      * A inline value.
      */
     public class InlineValue implements Value {
+
+        // public InlineValue(String value) {
+        //     this.value = value;
+        // }
+
         public InlineValue(String value) {
             this.value = value;
         }
