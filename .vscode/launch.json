@@ -6,6 +6,12 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Main",
+            "request": "launch",
+            "mainClass": "nl.playdnd.Main"
+        },
+        {
+            "type": "java",
             "name": "DungeonsAndObjectOrientedDragons",
             "request": "launch",
             "mainClass": "nl.playdnd.player.DungeonsAndObjectOrientedDragons",

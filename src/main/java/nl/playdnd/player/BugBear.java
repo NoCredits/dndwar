@@ -1,5 +1,7 @@
 package nl.playdnd.player;
 
+import nl.playdnd.dasic.DasicAI;
+
 /**
  * Bugbear.java
  *
@@ -15,6 +17,18 @@ class Bugbear extends NonPlayerCharacter {
         this.myArmor = new Armor("Hefty Garbage Bag, with Holes Cut Out for Arms", 4);
         health = (int) ((Math.random() * HEALTH_MULTIPLIER) + 10);
         gold = (int) ((Math.random() * GOLD_MULTIPLIER) + 20);
+    }
+
+    @Override
+    public DasicAI initDasic() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'initDasic'");
+    }
+
+    @Override
+    public void interpret() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'interpret'");
     }
 
 }

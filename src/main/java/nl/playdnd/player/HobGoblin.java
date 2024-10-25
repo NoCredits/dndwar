@@ -1,5 +1,7 @@
 package nl.playdnd.player;
 
+import nl.playdnd.dasic.DasicAI;
+
 /**
  * Hobgoblin.java
  *
@@ -17,5 +19,17 @@ class Hobgoblin extends NonPlayerCharacter {
         this.myArmor = new Armor("Trash Can Lid for a Breastplate, Suspended with Bungee Cords", 6);
         health = (int) ((Math.random() * HEALTH_MULTIPLIER) + 5);
         gold = (int) ((Math.random() * GOLD_MULTIPLIER) + 10);
+    }
+
+    @Override
+    public DasicAI initDasic() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'initDasic'");
+    }
+
+    @Override
+    public void interpret() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'interpret'");
     }
 }

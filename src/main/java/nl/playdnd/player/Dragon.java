@@ -1,5 +1,7 @@
 package nl.playdnd.player;
 
+import nl.playdnd.dasic.DasicAI;
+
 /**
  * Dragon.java
  *
@@ -15,5 +17,17 @@ class Dragon extends NonPlayerCharacter {
         this.myArmor = new Armor("Enchanted Hide", 10);
         health = (int) ((Math.random() * HEALTH_MULTIPLIER) + 20);
         gold = (int) ((Math.random() * GOLD_MULTIPLIER) + 500);
+    }
+
+    @Override
+    public DasicAI initDasic() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'initDasic'");
+    }
+
+    @Override
+    public void interpret() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'interpret'");
     }
 }

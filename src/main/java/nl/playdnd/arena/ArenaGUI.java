@@ -2,13 +2,23 @@ package nl.playdnd.arena;
 
 import java.awt.*;
 import javax.swing.*;
-import java.awt.Point;
+
+import static nl.playdnd.global.Settings.*;
 
 public class ArenaGUI {
     private final JFrame window;
     private final Box scoreboard;
     // private final JPanel arena;
     private JLayeredPane arena;
+
+    public JLayeredPane getArena() {
+        return arena;
+    }
+
+    public void setArena(JLayeredPane arena) {
+        this.arena = arena;
+    }
+
     private final JTextArea turns;
 
     /*
@@ -26,6 +36,14 @@ public class ArenaGUI {
      * ensures that it is positioned over every other component in the container.
      * When finished dragging, it can be reassigned to its normal layer.
      */
+
+    private static ArenaGUI arenaGUI;
+
+    public static ArenaGUI getInstance() {
+        if (arenaGUI == null)
+            arenaGUI = new ArenaGUI();
+        return arenaGUI;
+    }
 
     public ArenaGUI() {
         window = new JFrame("Welkom");
@@ -64,7 +82,7 @@ public class ArenaGUI {
 
         arena.add(element, JLayeredPane.MODAL_LAYER);
         // element.setSize(20, 20);
-        element.setLocation(new Point(x * 21, y * 21));
+        element.setLocation(new Point(x * (TILESIZEX + TILESPACINGX), y * (TILESIZEY + TILESPACINGY)));
         return element;
     }
 
@@ -77,20 +95,20 @@ public class ArenaGUI {
         JPanel element = new JPanel();
 
         arena.add(element, JLayeredPane.MODAL_LAYER);
-        element.setSize(20, 20);
+        element.setSize(TILESIZEX, TILESIZEY);
         element.setBackground(color);
-        element.setLocation(new Point(x * 21, y * 21));
+        element.setLocation(new Point(x * (TILESIZEX + TILESPACINGY), y * (TILESIZEX + TILESPACINGY)));
 
         return element;
     }
 
-    public JPanel addTileElement(int x, int y) {
+    public JPanel addTile(int x, int y) {
         JPanel element = new JPanel();
 
         arena.add(element, JLayeredPane.DEFAULT_LAYER);
-        element.setSize(20, 20);
-        element.setBackground(Color.gray);
-        element.setLocation(new Point(x * 21, y * 21));
+        element.setSize(TILESIZEX, TILESIZEY);
+        element.setBackground(EMPTYTILECOLOR);
+        element.setLocation(new Point(x * (TILESIZEX + TILESPACINGX), y * (TILESIZEY + TILESPACINGY)));
 
         return element;
     }

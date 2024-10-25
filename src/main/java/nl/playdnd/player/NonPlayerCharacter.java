@@ -4,7 +4,7 @@ import java.awt.Point;
 
 import javax.swing.JPanel;
 
-import nl.playdnd.dasic.Dasic;
+import nl.playdnd.dasic.DasicAI;
 
 public abstract class NonPlayerCharacter implements DnDCharacter {
 
@@ -20,7 +20,7 @@ public abstract class NonPlayerCharacter implements DnDCharacter {
 
     private JPanel element;
     protected java.awt.Color color;
-    protected Dasic dasic;
+    protected DasicAI dasicAI;
     // These are used in the calculations to autogenerate the values for their
     // respective fields
     private final int ATTACK_MODIFIER = 4;
@@ -151,8 +151,8 @@ public abstract class NonPlayerCharacter implements DnDCharacter {
     }
 
     @Override
-    public Dasic getDasic() {
-        return dasic;
+    public DasicAI getDasic() {
+        return dasicAI;
     }
 
 }

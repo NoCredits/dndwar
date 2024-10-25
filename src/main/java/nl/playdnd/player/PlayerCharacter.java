@@ -6,8 +6,12 @@ import java.util.Scanner;
 
 import javax.swing.JPanel;
 
-import nl.playdnd.dasic.Dasic;
+import lombok.Getter;
+import lombok.Setter;
+import nl.playdnd.dasic.DasicAI;
 
+@Setter
+@Getter
 public abstract class PlayerCharacter implements DnDCharacter {
 
     private String name;
@@ -21,11 +25,12 @@ public abstract class PlayerCharacter implements DnDCharacter {
     protected Point position; // Store the character's position on the map
     protected JPanel element;
     protected java.awt.Color color;
-    protected Dasic dasic;
+    protected DasicAI dasicAI;
 
     private final Scanner keyboardInput = new Scanner(System.in);
 
     public PlayerCharacter() {
+        setDasicAI(initDasic());
         setHealth((int) ((Math.random()) + 25));
     }
 
@@ -141,8 +146,13 @@ public abstract class PlayerCharacter implements DnDCharacter {
     }
 
     @Override
-    public Dasic getDasic() {
-        return dasic;
+    public DasicAI getDasic() {
+        return dasicAI;
+    }
+
+    @Override
+    public void interpret() {
+        dasicAI.interpret();
     }
 
 }
