@@ -1,6 +1,6 @@
 package nl.playdnd.dasic.expression;
 
-import nl.playdnd.dasic.interpreter.Variables;
+import nl.playdnd.dasic.interpreter.SourceCode;
 import nl.playdnd.dasic.value.Value;
 
 /**
@@ -17,5 +17,5 @@ import nl.playdnd.dasic.value.Value;
          * 
          * @return The value of the calculated expression.
          */
-        Value evaluate(Variables globals);
+        Value evaluate(SourceCode globals);
     }

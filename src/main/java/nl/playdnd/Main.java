@@ -1,10 +1,11 @@
 package nl.playdnd;
 
 import nl.playdnd.arena.BattleMap;
+import nl.playdnd.character.Warrior;
+import nl.playdnd.character.Wizard;
 import nl.playdnd.arena.ArenaGUI;
 import nl.playdnd.dasic.DasicAI;
-import nl.playdnd.player.Warrior;
-import nl.playdnd.player.Wizard;
+
 import java.awt.*;
 import javax.swing.*;
 import java.util.concurrent.TimeUnit;

@@ -1,6 +1,6 @@
 package nl.playdnd.dasic.expression;
 
-import nl.playdnd.dasic.interpreter.Variables;
+import nl.playdnd.dasic.interpreter.SourceCode;
 import nl.playdnd.dasic.value.NumberValue;
 import nl.playdnd.dasic.value.StringValue;
 import nl.playdnd.dasic.value.Value;
@@ -17,7 +17,7 @@ import nl.playdnd.dasic.value.Value;
             this.right = right;
         }
         
-        public Value evaluate(Variables globals) {
+        public Value evaluate(SourceCode globals) {
             Value leftVal = left.evaluate(globals);
             Value rightVal = right.evaluate(globals);
             

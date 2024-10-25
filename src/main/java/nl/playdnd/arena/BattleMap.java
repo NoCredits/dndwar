@@ -2,7 +2,9 @@ package nl.playdnd.arena;
 
 import java.awt.Point;
 import javax.swing.JPanel;
-import nl.playdnd.player.DnDEntity;
+
+import nl.playdnd.character.DnDEntity;
+
 import static nl.playdnd.global.Settings.*;
 
 //holds all entities en players

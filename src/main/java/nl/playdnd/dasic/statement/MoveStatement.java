@@ -1,7 +1,7 @@
 package nl.playdnd.dasic.statement;
 
 import nl.playdnd.dasic.expression.Expression;
-import nl.playdnd.dasic.interpreter.Variables;
+import nl.playdnd.dasic.interpreter.SourceCode;
 
 /**
      * A "print" statement evaluates an expression, converts the result to a
@@ -12,8 +12,8 @@ import nl.playdnd.dasic.interpreter.Variables;
             this.expression = expression;
         }
         
-        public void execute(Variables globals) {
-            System.out.println(expression.evaluate(globals).toString());
+        public void execute(SourceCode sourceCode) {
+            System.out.println(expression.evaluate(sourceCode).toString());
         }
 
         private final Expression expression;

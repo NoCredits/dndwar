@@ -1,6 +1,6 @@
 package nl.playdnd.dasic.statement;
 
-import nl.playdnd.dasic.interpreter.Variables;
+import nl.playdnd.dasic.interpreter.SourceCode;
 
 // Abstract syntax tree (AST) ----------------------------------------------
 
@@ -22,5 +22,5 @@ import nl.playdnd.dasic.interpreter.Variables;
          * statement causes. "print" statements will display text here, "goto"
          * statements will change the current statement, etc.
          */
-        void execute(Variables globals);
+        void execute(SourceCode sourceCode);
     }

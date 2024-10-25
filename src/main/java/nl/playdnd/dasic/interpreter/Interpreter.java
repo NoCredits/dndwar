@@ -2,14 +2,16 @@ package nl.playdnd.dasic.interpreter;
 
 import java.util.*;
 
+import nl.playdnd.character.DnDCharacter;
+import nl.playdnd.character.Vars;
 import nl.playdnd.dasic.statement.Statement;
 import nl.playdnd.dasic.token.Token;
 import nl.playdnd.dasic.token.TokenType;
 import nl.playdnd.dasic.token.TokenizeState;
-import nl.playdnd.player.Vars;
 
 public class Interpreter {
 
+    
     /**
      * This is where the magic happens. This runs the code through the parsing
      * pipeline to generate the AST. Then it executes each statement. It keeps
@@ -24,26 +26,26 @@ public class Interpreter {
      *               interpret.
      */
 
-    Vars vars;
+    
+    public static void interpret(DnDCharacter character, SourceCode sourceCode) {
 
-    public void interpret(Variables globals) {
-
-        this.vars = vars;
         // Tokenize.
-        List<Token> tokens = tokenize(globals.getSource());
+        List<Token> tokens = tokenize(sourceCode.getSource());
 
         // Parse.
         Parser parser = new Parser(tokens);
-        List<Statement> statements = parser.parse(globals.getLabels());
+        sourceCode.setStatements( parser.parse(sourceCode.getLabels()) );
 
         // Interpret until we're done.
-        globals.setCurrentStatement(0);
-        while (globals.getCurrentStatement() < statements.size()) {
-            int thisStatement = globals.getCurrentStatement();
-            globals.setCurrentStatement(globals.getCurrentStatement() + 1);
-            statements.get(thisStatement).execute(globals);
+        sourceCode.setCurrentStatement(0);
+        
+        while (sourceCode.getCurrentStatement() < sourceCode.getStatements().size()) {
+            int thisStatement = sourceCode.getCurrentStatement();
+            sourceCode.setCurrentStatement(sourceCode.getCurrentStatement() + 1);
+            sourceCode.getStatements().get(thisStatement).execute(sourceCode);
         }
     }
+
 
     // Tokenizing (lexing) -----------------------------------------------------
 

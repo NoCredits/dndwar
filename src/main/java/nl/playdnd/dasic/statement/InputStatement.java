@@ -1,7 +1,9 @@
 package nl.playdnd.dasic.statement;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
-import nl.playdnd.dasic.interpreter.Variables;
+import nl.playdnd.dasic.interpreter.SourceCode;
 import nl.playdnd.dasic.value.NumberValue;
 import nl.playdnd.dasic.value.StringValue;
 
@@ -14,16 +16,20 @@ import nl.playdnd.dasic.value.StringValue;
             this.name = name;
         }
         
-        public void execute(Variables globals) {
+        public void execute(SourceCode sourceCode) {
+            InputStreamReader converter = new InputStreamReader(System.in);
+            BufferedReader lineIn = new BufferedReader(converter);
+
             try {
-                String input = globals.getLineIn().readLine();
+               // String input = sourceCode.getLineIn().readLine();
+               String input = lineIn.readLine();
                 
                 // Store it as a number if possible, otherwise use a string.
                 try {
                     double value = Double.parseDouble(input);
-                    globals.getVariables().put(name, new NumberValue(value));
+                    sourceCode.getVariables().put(name, new NumberValue(value));
                 } catch (NumberFormatException e) {
-                    globals.getVariables().put(name, new StringValue(input));
+                    sourceCode.getVariables().put(name, new StringValue(input));
                 }
             } catch (IOException e1) {
                 // HACK: Just ignore the problem.

@@ -1,6 +1,6 @@
 package nl.playdnd.dasic.expression;
 
-import nl.playdnd.dasic.interpreter.Variables;
+import nl.playdnd.dasic.interpreter.SourceCode;
 import nl.playdnd.dasic.value.NumberValue;
 import nl.playdnd.dasic.value.Value;
 
@@ -13,7 +13,7 @@ import nl.playdnd.dasic.value.Value;
             this.name = name;
         }
         
-        public Value evaluate(Variables globals) {
+        public Value evaluate(SourceCode globals) {
             if (globals.getVariables().containsKey(name)) {
                 return globals.getVariables().get(name);
             }

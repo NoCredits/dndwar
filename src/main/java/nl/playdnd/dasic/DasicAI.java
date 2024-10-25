@@ -10,9 +10,11 @@ import java.nio.charset.Charset;
 import lombok.Getter;
 import lombok.Setter;
 import nl.playdnd.arena.ArenaGUI;
+import nl.playdnd.character.DnDCharacter;
+import nl.playdnd.character.PlayerCharacter;
+import nl.playdnd.character.Vars;
 import nl.playdnd.dasic.interpreter.Interpreter;
-import nl.playdnd.dasic.interpreter.Variables;
-import nl.playdnd.player.Vars;
+import nl.playdnd.dasic.interpreter.SourceCode;
 
 /**
  * This defines a single class that contains an entire interpreter for a
@@ -106,16 +108,7 @@ import nl.playdnd.player.Vars;
 @Setter
 public class DasicAI {
 
-    private Variables globals;
-    private Interpreter intepreter;
-
-    // public Variables getGlobals() {
-    // return globals;
-    // }
-
-    // public void setGlobals(Variables globals) {
-    // this.globals = globals;
-    // }
+    private SourceCode sourceCode;
 
     /**
      * Constructs a new Dasic instance. The instance stores the global state of
@@ -123,22 +116,20 @@ public class DasicAI {
      * current statement.
      */
     public DasicAI() {
-        globals = new Variables();
-        intepreter = new Interpreter();
+        sourceCode = new SourceCode();
     }
 
     public DasicAI(String file) {
-        globals = new Variables(readFile(file));
-        intepreter = new Interpreter();
+        sourceCode = new SourceCode(readFile(file));
     }
 
-    public void interpret() {
-        intepreter.interpret(getGlobals());
+    public void interpret(DnDCharacter character) {
+        Interpreter.interpret(character, sourceCode);
     }
 
-    public void interpret(String source) {
-        globals.setSource(source);
-        intepreter.interpret(getGlobals());
+    public void interpret(DnDCharacter character, String source) {
+        sourceCode.setSource(source);
+        Interpreter.interpret(character, sourceCode);
 
     }
 

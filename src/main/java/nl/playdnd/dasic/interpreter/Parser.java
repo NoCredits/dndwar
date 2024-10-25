@@ -31,6 +31,10 @@ import nl.playdnd.dasic.value.StringValue;
      * label in the program. It's a bit gross, but it works.
      */
     public class Parser {
+                
+        private final List<Token> tokens;
+        private int position;
+
         public Parser(List<Token> tokens) {
             this.tokens = tokens;
             position = 0;
@@ -49,8 +53,8 @@ import nl.playdnd.dasic.value.StringValue;
             List<Statement> statements = new ArrayList<Statement>();
             
             while (true) {
-                // Ignore empty lines.
-                while (match(TokenType.LINE));
+                
+                while (match(TokenType.LINE)) {}; // Ignore empty lines.
                 
                 if (match(TokenType.LABEL)) {
                     // Mark the index of the statement after the label.
@@ -259,7 +263,4 @@ import nl.playdnd.dasic.value.StringValue;
             }
             return tokens.get(position + offset);
         }
-        
-        private final List<Token> tokens;
-        private int position;
     }

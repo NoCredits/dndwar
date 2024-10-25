@@ -1,7 +1,7 @@
 package nl.playdnd.dasic.statement;
 
 import nl.playdnd.dasic.expression.Expression;
-import nl.playdnd.dasic.interpreter.Variables;
+import nl.playdnd.dasic.interpreter.SourceCode;
 
 /**
      * An assignment statement evaluates an expression and stores the result in
@@ -13,8 +13,8 @@ import nl.playdnd.dasic.interpreter.Variables;
             this.value = value;
         }
         
-        public void execute(Variables globals) {
-            globals.getVariables().put(name, value.evaluate(globals));
+        public void execute(SourceCode sourceCode) {
+            sourceCode.getVariables().put(name, value.evaluate(sourceCode));
         }
 
         private final String name;

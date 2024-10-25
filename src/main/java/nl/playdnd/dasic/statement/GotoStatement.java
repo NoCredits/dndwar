@@ -1,6 +1,6 @@
 package nl.playdnd.dasic.statement;
 
-import nl.playdnd.dasic.interpreter.Variables;
+import nl.playdnd.dasic.interpreter.SourceCode;
 
 /**
      * A "goto" statement jumps execution to another place in the program.
@@ -10,9 +10,9 @@ import nl.playdnd.dasic.interpreter.Variables;
             this.label = label;
         }
         
-        public void execute(Variables globals) {
-            if (globals.getLabels().containsKey(label)) {
-                globals.setCurrentStatement(globals.getLabels().get(label).intValue());
+        public void execute(SourceCode sourceCode) {
+            if (sourceCode.getLabels().containsKey(label)) {
+                sourceCode.setCurrentStatement(sourceCode.getLabels().get(label).intValue());
             }
         }
 

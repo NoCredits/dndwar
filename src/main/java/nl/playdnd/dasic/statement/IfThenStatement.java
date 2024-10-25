@@ -1,7 +1,7 @@
 package nl.playdnd.dasic.statement;
 
 import nl.playdnd.dasic.expression.Expression;
-import nl.playdnd.dasic.interpreter.Variables;
+import nl.playdnd.dasic.interpreter.SourceCode;
 
 /**
      * An if then statement jumps execution to another place in the program, but
@@ -13,11 +13,11 @@ import nl.playdnd.dasic.interpreter.Variables;
             this.label = label;
         }
         
-        public void execute(Variables globals) {
-            if (globals.getLabels().containsKey(label)) {
-                double value = condition.evaluate(globals).toNumber();
+        public void execute(SourceCode sourceCode) {
+            if (sourceCode.getLabels().containsKey(label)) {
+                double value = condition.evaluate(sourceCode).toNumber();
                 if (value != 0) {
-                    globals.setCurrentStatement(globals.getLabels().get(label).intValue());
+                    sourceCode.setCurrentStatement(sourceCode.getLabels().get(label).intValue());
                 }
             }
         }
