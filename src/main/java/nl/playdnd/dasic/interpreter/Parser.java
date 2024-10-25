@@ -2,6 +2,7 @@ package nl.playdnd.dasic.interpreter;
 
 import java.util.*;
 
+import nl.playdnd.character.InlineValues;
 import nl.playdnd.dasic.expression.Expression;
 import nl.playdnd.dasic.expression.OperatorExpression;
 import nl.playdnd.dasic.expression.VariableExpression;
@@ -14,6 +15,7 @@ import nl.playdnd.dasic.statement.PrintStatement;
 import nl.playdnd.dasic.statement.Statement;
 import nl.playdnd.dasic.token.Token;
 import nl.playdnd.dasic.token.TokenType;
+import nl.playdnd.dasic.value.InlineValue;
 import nl.playdnd.dasic.value.NumberValue;
 import nl.playdnd.dasic.value.StringValue;
 
@@ -34,8 +36,10 @@ import nl.playdnd.dasic.value.StringValue;
                 
         private final List<Token> tokens;
         private int position;
+        private InlineValues inlineValues;
 
-        public Parser(List<Token> tokens) {
+        public Parser(List<Token> tokens, InlineValues inlineValues) {
+            this.inlineValues = inlineValues;
             this.tokens = tokens;
             position = 0;
         }
@@ -162,7 +166,8 @@ import nl.playdnd.dasic.value.StringValue;
                 // The contents of a curlybraced is an inline variable
                 //Expression expression = expression();
                 expression();  //consumes the expression
-                StringValue inline =new StringValue(last(1).text);
+                //InlineValue inline =new InlineValue(last(1).text);
+                InlineValue inline =new InlineValue( inlineValues.getStringValue( (last(1).text)) );
                 consume(TokenType.RIGHT_CURLYBRACE);
                 return inline;
             }

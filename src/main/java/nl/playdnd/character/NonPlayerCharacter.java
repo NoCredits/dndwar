@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 
 import nl.playdnd.dasic.DasicAI;
 
-public abstract class NonPlayerCharacter  extends Character implements DnDCharacter {
+public abstract class NonPlayerCharacter  extends InlineValues implements DnDCharacter {
 
     protected String name;
     protected Weapon myWeapon;

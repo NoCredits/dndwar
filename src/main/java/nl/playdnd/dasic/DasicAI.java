@@ -123,11 +123,11 @@ public class DasicAI {
         sourceCode = new SourceCode(readFile(file));
     }
 
-    public void interpret(DnDCharacter character) {
+    public void interpret(nl.playdnd.character.InlineValues character) {
         Interpreter.interpret(character, sourceCode);
     }
 
-    public void interpret(DnDCharacter character, String source) {
+    public void interpret(nl.playdnd.character.InlineValues character, String source) {
         sourceCode.setSource(source);
         Interpreter.interpret(character, sourceCode);
 

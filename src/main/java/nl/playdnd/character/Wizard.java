@@ -1,14 +1,11 @@
 package nl.playdnd.character;
 
 import java.awt.Color;
-import java.util.*;
 import static nl.playdnd.global.Settings.*;
 
-import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 import nl.playdnd.dasic.DasicAI;
-import nl.playdnd.dasic.interpreter.SourceCode;
 
 public class Wizard extends PlayerCharacter {
 
@@ -32,6 +29,7 @@ public class Wizard extends PlayerCharacter {
         }
         // element.move(30, 30);
     }
+
 
     @Override
     public DasicAI initDasic() {

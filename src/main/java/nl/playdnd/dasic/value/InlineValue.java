@@ -9,7 +9,8 @@ import nl.playdnd.dasic.interpreter.SourceCode;
         public InlineValue(String value) {
             this.value = value;
         }
-        
+
+
         @Override public String toString() { return value; }
         public double toNumber() { return Double.parseDouble(value); }
         public Value evaluate(SourceCode sourceCode) { return this; }

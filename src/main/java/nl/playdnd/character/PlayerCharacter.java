@@ -12,9 +12,8 @@ import nl.playdnd.dasic.DasicAI;
 
 @Setter
 @Getter
-public abstract class PlayerCharacter extends Character implements DnDCharacter {
+public abstract class PlayerCharacter extends InlineValues implements DnDCharacter {
 
-    private String name;
     private Armor myArmor;
     private int level;
     private Weapon myWeapon;
@@ -131,9 +130,9 @@ public abstract class PlayerCharacter extends Character implements DnDCharacter 
         return dasicAI;
     }
 
+
     @Override
     public void interpret() {
         dasicAI.interpret(this);
     }
-
 }

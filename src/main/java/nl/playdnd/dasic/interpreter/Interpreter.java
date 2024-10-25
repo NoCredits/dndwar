@@ -2,7 +2,7 @@ package nl.playdnd.dasic.interpreter;
 
 import java.util.*;
 
-import nl.playdnd.character.DnDCharacter;
+
 import nl.playdnd.character.Vars;
 import nl.playdnd.dasic.statement.Statement;
 import nl.playdnd.dasic.token.Token;
@@ -27,13 +27,13 @@ public class Interpreter {
      */
 
     
-    public static void interpret(DnDCharacter character, SourceCode sourceCode) {
+    public static void interpret(nl.playdnd.character.InlineValues character, SourceCode sourceCode) {
 
         // Tokenize.
         List<Token> tokens = tokenize(sourceCode.getSource());
 
         // Parse.
-        Parser parser = new Parser(tokens);
+        Parser parser = new Parser(tokens, character);
         sourceCode.setStatements( parser.parse(sourceCode.getLabels()) );
 
         // Interpret until we're done.

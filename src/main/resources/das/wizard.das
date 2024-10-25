@@ -1,7 +1,8 @@
       ' initialize the loop counter
       test = "Wizard Petra"
-      t = {inline}
-      print t
+      t = {health}
+      n = {name}
+      print n+" health = "+t
       move 10
       count = 3
       ' stop looping if we're done
