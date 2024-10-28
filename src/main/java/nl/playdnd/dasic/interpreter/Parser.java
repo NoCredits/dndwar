@@ -162,12 +162,26 @@ import nl.playdnd.dasic.value.StringValue;
                 Expression expression = expression();
                 consume(TokenType.RIGHT_PAREN);
                 return expression;
-            } else if (match(TokenType.LEFT_CURLYBRACE)) {
+            } 
+            // else if (match(TokenType.LEFT_CURLYBRACE)) {
+            //     // The contents of a curlybraced is an inline variable
+            //     expression();  //consumes the expression
+            //     var val = inlineValues.getValue( (last(1).text));
+            //     //System.out.println("val= "+val);
+            //     consume(TokenType.RIGHT_CURLYBRACE);
+                
+            //     if (val instanceof String) return new StringValue((String) val);
+            //     if (val instanceof Integer) return new NumberValue((int) val);
+            //     if (val instanceof Double) return new NumberValue((double) val);
+                
+            //     return new StringValue(null);
+            // }
+            else if (match(TokenType.INLINE)) {
                 // The contents of a curlybraced is an inline variable
-                expression();  //consumes the expression
+                //expression();  //consumes the expression
                 var val = inlineValues.getValue( (last(1).text));
                 //System.out.println("val= "+val);
-                consume(TokenType.RIGHT_CURLYBRACE);
+                //consume(TokenType.RIGHT_CURLYBRACE);
                 
                 if (val instanceof String) return new StringValue((String) val);
                 if (val instanceof Integer) return new NumberValue((int) val);
@@ -175,6 +189,7 @@ import nl.playdnd.dasic.value.StringValue;
                 
                 return new StringValue(null);
             }
+
             throw new Error("Couldn't parse :(");
         }
         

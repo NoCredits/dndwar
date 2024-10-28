@@ -26,6 +26,7 @@ public class BattleMap {
 
             }
         }
+        
     }
 
     // Method to place a character at a given (x, y) position

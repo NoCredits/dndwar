@@ -13,31 +13,8 @@ public abstract class InlineValues {
 
     protected String name;
 
-    public int agetValue(String inline) {
-        switch (inline) {
-            case "health":
-                return health;
-            case "strength":
-                return strength;
-            default:
-                return 0;
-        }
+    protected FaceTo face;
 
-    }
-
-    public String bgetValue(String inline) {
-        switch (inline) {
-            case "health":
-                return String.valueOf(health);
-            case "strength":
-                return String.valueOf(strength);
-            case "name":
-                return name;
-            default:
-                return "unknown";
-        }
-
-    }
 
     public <O> Object getValue(String inline) {
 

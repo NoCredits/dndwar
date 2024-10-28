@@ -1,6 +1,7 @@
 package nl.playdnd;
 
 import nl.playdnd.arena.BattleMap;
+import nl.playdnd.character.FaceTo;
 import nl.playdnd.character.Warrior;
 import nl.playdnd.character.Wizard;
 import nl.playdnd.arena.ArenaGUI;
@@ -29,37 +30,31 @@ public class Main {
         rygar.setPosition(new Point(0, 0));
         gandalf.setPosition(new Point(4, 4));
 
-        //System.out.println("Initial Map:");
-        //battleMap.displayMap();
+        // System.out.println("Initial Map:");
+        // battleMap.displayMap();
 
-        // int sx = 2;
-        // do {
-        //     try {
-        //         Thread.sleep(1000);
-        //     } catch (InterruptedException e) {
-        //         // TODO Auto-generated catch block
-        //         e.printStackTrace();
-        //     }
-        //     // Move Aragorn closer to Gandalf
-        //     battleMap.moveCharacter(rygar, 2 + sx, 2);
-        //     // rygar.setPosition(new Point(2, 2));
+        int sx = 1;
+        while ( sx++ < 2) {
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
 
-        //     // Move Gandalf closer to Aragorn
-        //     battleMap.moveCharacter(gandalf, 3 + sx, 3);
-        //     // gandalf.setPosition(new Point(3, 3));
+            rygar.setFace(FaceTo.EAST);
+            //rygar.getElement().repaint();
+            battleMap.moveCharacter(rygar, 2 + sx, 2);
+            battleMap.moveCharacter(gandalf, 3 + sx, 3);
 
-        //     // Display the updated map
-        //     System.out.println("\nAfter Moving:");
-        //     //battleMap.displayMap();
-        //     // Wizard casts Fireball on Fighter
-        //     gandalf.attack(rygar);
+            System.out.println("\nAfter Moving:");
+            //battleMap.displayMap();
+            gandalf.attack(rygar);
 
-        //     // Fighter attacks Wizard
-        //     rygar.attack(gandalf);
+            rygar.attack(gandalf);
 
-        //     // Wizard casts Lightning Bolt on Fi
 
-        // } while (sx++ < 3);
+        } 
 
     }
 

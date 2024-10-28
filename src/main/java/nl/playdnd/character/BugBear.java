@@ -7,8 +7,8 @@ import nl.playdnd.dasic.DasicAI;
  *
  * A Bugbear is intended to be a "medium-strength" monster.
  */
-class Bugbear extends NonPlayerCharacter {
-    private final int GOLD_MULTIPLIER = 200;
+class Bugbear extends DnDCharacter {
+    
     private final int HEALTH_MULTIPLIER = 15;
 
     public Bugbear() {
@@ -16,7 +16,7 @@ class Bugbear extends NonPlayerCharacter {
         this.myWeapon = new Weapon("Really Big Fly Swatter", 8);
         this.myArmor = new Armor("Hefty Garbage Bag, with Holes Cut Out for Arms", 4);
         setHealth( (int) ((Math.random() * HEALTH_MULTIPLIER) + 10));
-        gold = (int) ((Math.random() * GOLD_MULTIPLIER) + 20);
+      
     }
 
     @Override
@@ -31,4 +31,29 @@ class Bugbear extends NonPlayerCharacter {
         throw new UnsupportedOperationException("Unimplemented method 'interpret'");
     }
 
+    @Override
+    public String getNorthImagePath() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getNorthImagePath'");
+    }
+
+    @Override
+    public String getEastImagePath() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getEastImagePath'");
+    }
+
+    @Override
+    public String getSouthImagePath() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getSouthImagePath'");
+    }
+
+    @Override
+    public String getWestImagePath() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getWestImagePath'");
+    }
+    
+    
 }

@@ -8,18 +8,19 @@ import javax.swing.JPanel;
 
 import nl.playdnd.dasic.DasicAI;
 
-public class Warrior extends PlayerCharacter {
+public class Warrior extends DnDCharacter {
 
     public Warrior(String name, int health, int strength) {
         setName(name);
         setHealth(health);
         setStrength(strength);
 
-        JPanel element = new JPanel();
-        element.setSize(TILESIZEX, TILESIZEY);
-        element.setBackground(Color.red);
-        setElement(element);
+        // JPanel element = new JPanel();
+        // element.setSize(TILESIZEX, TILESIZEY);
+        // element.setBackground(Color.red);
+        // setElement(element);
 
+        createElement();
         System.out.println("Warrior");
         interpret();
 
@@ -45,5 +46,31 @@ public class Warrior extends PlayerCharacter {
         return new DasicAI("src/main/resources/das/warrior.das");
 
     }
+
+
+    @Override
+    public String getNorthImagePath() {
+        return "src/main/resources/wizardnorth.png";    
+    }    
+
+
+
+    @Override
+    public String getEastImagePath() {
+        return "src/main/resources/wizardeast.png";    
+    }
+
+
+    @Override
+    public String getSouthImagePath() {
+        return "src/main/resources/wizardsouth.png";
+    }
+
+
+    @Override
+    public String getWestImagePath() {
+        return "src/main/resources/wizardwest.png";    
+    }
+    
 
 }

@@ -62,12 +62,12 @@ public class Interpreter {
         TokenizeState state = TokenizeState.DEFAULT;
 
         // Many tokens are a single character, like operators and ().
-        String charTokens = "\n=+-*/<>(){}";
+        //String charTokens = "\n=+-*/<>(){}";
+        String charTokens = "\n=+-*/<>()";
         TokenType[] tokenTypes = { TokenType.LINE, TokenType.EQUALS,
                 TokenType.OPERATOR, TokenType.OPERATOR, TokenType.OPERATOR,
                 TokenType.OPERATOR, TokenType.OPERATOR, TokenType.OPERATOR,
                 TokenType.LEFT_PAREN, TokenType.RIGHT_PAREN,
-                TokenType.LEFT_CURLYBRACE, TokenType.RIGHT_CURLYBRACE
         };
         // Scan through the code one character at a time, building up the list
         // of tokens.
@@ -88,6 +88,25 @@ public class Interpreter {
                         state = TokenizeState.STRING;
                     } else if (c == '\'') {
                         state = TokenizeState.COMMENT;
+                    } else if (c == '{') {
+                        //System.out.println("inline found");
+                        state = TokenizeState.INLINE;
+                    }
+                    break;
+
+                case INLINE:
+                    if (Character.isLetterOrDigit(c)) {
+                        token += c;
+                    } else if (c == '}') {
+                        tokens.add(new Token(token, TokenType.INLINE));
+                        token = "";
+                        state = TokenizeState.DEFAULT;
+                    } else {
+                        //INCORRECT INLINE
+                        //tokens.add(new Token(token, TokenType.INLINE));
+                        token = "";
+                        state = TokenizeState.DEFAULT;
+                        i--; // Reprocess this character in the default state.
                     }
                     break;
 
@@ -141,7 +160,7 @@ public class Interpreter {
         // HACK: Silently ignore any in-progress token when we run out of
         // characters. This means that, for example, if a script has a string
         // that's missing the closing ", it will just ditch it.
-        for (Token t:tokens) System.out.println(t.text+" "+t.type);;
+        //for (Token t:tokens) System.out.println(t.text+" "+t.type);;
         return tokens;
     }
 

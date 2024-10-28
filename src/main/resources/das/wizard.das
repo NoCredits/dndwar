@@ -2,7 +2,7 @@
       test = "Wizard Petra"
       n = {name}
       t = {health}
-      print n+" health = "+t
+      print n +" health = "+t
       move 10
       count = 1
       ' stop looping if we're done

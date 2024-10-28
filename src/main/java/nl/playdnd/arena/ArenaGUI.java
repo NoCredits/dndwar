@@ -48,14 +48,15 @@ public class ArenaGUI {
     public ArenaGUI() {
         window = new JFrame("Welkom");
         window.getContentPane().setLayout(new BoxLayout(window.getContentPane(), BoxLayout.X_AXIS));
-
-        window.setSize(780, 560);
+        
+        window.setSize(1200, 800);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         window.setBackground(Color.white);
         arena = new JLayeredPane();
+        
         arena.setLocation(new Point(0, 0));
-        arena.setPreferredSize(new Dimension(530, 560));
+        arena.setPreferredSize(new Dimension(800, 800));
         // arena.setBackground(Color.YELLOW);
         arena.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -68,6 +69,7 @@ public class ArenaGUI {
         scoreboard = Box.createVerticalBox();
         scoreboard.setPreferredSize(new Dimension(250, 560));
         scoreboard.setBackground(Color.GRAY);
+        
         JLabel textArea = new JLabel("Scoreboard");
         scoreboard.add(textArea);
 
@@ -78,13 +80,33 @@ public class ArenaGUI {
         window.setVisible(true);
     }
 
+    public  void setVisible(boolean visible) {
+        window.setVisible(visible);
+    }
+
+
     public JPanel addElement(int x, int y, JPanel element) {
 
         arena.add(element, JLayeredPane.MODAL_LAYER);
         // element.setSize(20, 20);
         element.setLocation(new Point(x * (TILESIZEX + TILESPACINGX), y * (TILESIZEY + TILESPACINGY)));
+       // addFog(x, y);
         return element;
     }
+
+    public JPanel addFog(int x, int y) {
+        JPanel element = new JPanel();
+
+        element.setSize(TILESIZEX, TILESIZEY);
+        element.setBackground(new Color(0,0,0,15)); 
+        //element.setOpaque(false);
+        //element.setBackground(Color.CYAN);
+        element.setLocation(new Point(x * (TILESIZEX + TILESPACINGX), y * (TILESIZEY + TILESPACINGY)));
+        arena.add(element, JLayeredPane.DRAG_LAYER);
+     
+        return element;
+    }
+
 
     /**
      * Adds an element to the GUI that represents a robot.
@@ -98,7 +120,6 @@ public class ArenaGUI {
         element.setSize(TILESIZEX, TILESIZEY);
         element.setBackground(color);
         element.setLocation(new Point(x * (TILESIZEX + TILESPACINGY), y * (TILESIZEX + TILESPACINGY)));
-
         return element;
     }
 
@@ -112,6 +133,7 @@ public class ArenaGUI {
 
         return element;
     }
+
 
     /**
      * Adds an info box to the GUI that will be used to display the information of a
@@ -195,4 +217,35 @@ public class ArenaGUI {
         winnerDialog.setSize(200, 100);
         winnerDialog.setVisible(true);
     }
+
+    
+    // protected void drawImageTopLeft(Graphics2D g2d) {
+    //     g2d = (Graphics2D) g2d.create();
+    //     int x = 0;
+    //     int y = 0;
+
+    //     g2d.rotate(Math.toRadians(135), image.getWidth() / 2, image.getHeight() / 2);
+    //     g2d.drawImage(image, x, y, this);
+    //     g2d.dispose();
+    // }
+
+    // protected void drawImageBottomRight(Graphics2D g2d) {
+    //     g2d = (Graphics2D) g2d.create();
+    //     int x = (getWidth() - image.getWidth());
+    //     int y = (getHeight() - image.getHeight());
+
+    //     g2d.rotate(Math.toRadians(-45), getWidth() - (image.getWidth() / 2), getHeight() - (image.getHeight() / 2));
+    //     g2d.drawImage(image, x, y, this);
+    //     g2d.dispose();
+    // }
+
+    // protected void drawImageMiddle(Graphics2D g2d) {
+    //     g2d = (Graphics2D) g2d.create();
+    //     int x = (getWidth() - image.getWidth()) / 2;
+    //     int y = (getHeight() - image.getHeight()) / 2;
+
+    //     g2d.rotate(Math.toRadians(45), getWidth() / 2, getHeight() / 2);
+    //     g2d.drawImage(image, x, y, this);
+    //     g2d.dispose();
+    // }
 }
