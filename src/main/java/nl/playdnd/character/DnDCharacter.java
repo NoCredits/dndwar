@@ -16,6 +16,7 @@ import lombok.Setter;
 import nl.playdnd.arena.BattleMap;
 import nl.playdnd.dasic.DasicAI;
 import nl.playdnd.global.FaceTo;
+import nl.playdnd.global.Util;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -206,23 +207,28 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
     }
 
     @Override
-    public void move () {
+    public void move (int distance) {
+        
         System.out.println("facing "+getFaceTo());
 
-        Point newPos = getPosition();
-        if (getFaceTo() == FaceTo.NORTH) { 
-            newPos=new Point(getPosition().x,getPosition().y - 1);
+        for (int d = 0; d<distance; d++) {
+
+            Point newPos = getPosition();
+            if (getFaceTo() == FaceTo.NORTH) { 
+                newPos=new Point(getPosition().x,getPosition().y - 1);
+            }
+            if (getFaceTo() == FaceTo.EAST) { 
+                newPos=new Point(getPosition().x+1,getPosition().y );
+             }
+             if (getFaceTo() == FaceTo.SOUTH) { 
+                newPos=new Point(getPosition().x,getPosition().y + 1);
+            }
+            if (getFaceTo() == FaceTo.WEST) { 
+                newPos=new Point(getPosition().x - 1,getPosition().y );
+             }
+             if (battleMap.getCharacterAt(newPos.x, newPos.y) == null) { battleMap.moveCharacter(this,newPos);}
+             Util.sleep(500);
         }
-        if (getFaceTo() == FaceTo.EAST) { 
-            newPos=new Point(getPosition().x+1,getPosition().y );
-         }
-         if (getFaceTo() == FaceTo.SOUTH) { 
-            newPos=new Point(getPosition().x,getPosition().y + 1);
-        }
-        if (getFaceTo() == FaceTo.WEST) { 
-            newPos=new Point(getPosition().x - 1,getPosition().y );
-         }
-         if (battleMap.getCharacterAt(newPos.x, newPos.y) == null) { battleMap.moveCharacter(this,newPos);}
      
     }
 

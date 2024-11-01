@@ -8,13 +8,17 @@ import nl.playdnd.dasic.expression.OperatorExpression;
 import nl.playdnd.dasic.expression.VariableExpression;
 import nl.playdnd.dasic.statement.AssignStatement;
 import nl.playdnd.dasic.statement.DelayStatement;
-import nl.playdnd.dasic.statement.FaceToStatement;
 import nl.playdnd.dasic.statement.GotoStatement;
 import nl.playdnd.dasic.statement.IfThenStatement;
 import nl.playdnd.dasic.statement.InputStatement;
-import nl.playdnd.dasic.statement.MoveStatement;
 import nl.playdnd.dasic.statement.PrintStatement;
 import nl.playdnd.dasic.statement.Statement;
+import nl.playdnd.dasic.statement.move.EStatement;
+import nl.playdnd.dasic.statement.move.FaceToStatement;
+import nl.playdnd.dasic.statement.move.MoveStatement;
+import nl.playdnd.dasic.statement.move.NStatement;
+import nl.playdnd.dasic.statement.move.SStatement;
+import nl.playdnd.dasic.statement.move.WStatement;
 import nl.playdnd.dasic.token.Token;
 import nl.playdnd.dasic.token.TokenType;
 import nl.playdnd.dasic.value.InlineValue;
@@ -61,7 +65,9 @@ import nl.playdnd.global.FaceTo;
             
             while (true) {
                 
-                while (match(TokenType.LINE)) {}; // Ignore empty lines.
+                while (match(TokenType.LINE)) {
+                    
+                }; // Ignore empty lines.
                 
                 if (match(TokenType.LABEL)) {
                     // Mark the index of the statement after the label.
@@ -72,14 +78,31 @@ import nl.playdnd.global.FaceTo;
                     statements.add(new AssignStatement(name, value));
                 } else if (match("move")) {
                     statements.add(new MoveStatement(expression()));
+                } else if (match("N")) {
+//                    System.out.println(get(0).type+" "+get(0).text);
+                    if (match(TokenType.LINE)) {
+                        statements.add(new NStatement());
+                    }
+                    else statements.add(new NStatement(expression()));
+                } else if (match("E")) {
+                    if (match(TokenType.LINE)) {
+                        statements.add(new EStatement());
+                    } else statements.add(new EStatement(expression()));
+                } else if (match("S")) {
+                    if (match(TokenType.LINE)) {
+                        statements.add(new SStatement());
+                    } statements.add(new SStatement(expression()));
+                } else if (match("W")) {
+                    if (match(TokenType.LINE)) {
+                        statements.add(new WStatement());
+                    } statements.add(new WStatement(expression()));
                 } else if (match("print")) {
                     statements.add(new PrintStatement(expression()));
                 } else if (match("input")) {
                     statements.add(new InputStatement(
                         consume(TokenType.WORD).text));
-                } else if (match("faceTo")) {
-                    statements.add(new FaceToStatement(
-                        consume(TokenType.WORD).text));
+                } else if (match("face")) {
+                    statements.add(new FaceToStatement(expression()));
                 } else if (match("delay")) {
                     statements.add(new DelayStatement(
                         consume(TokenType.NUMBER).text));
@@ -96,6 +119,7 @@ import nl.playdnd.global.FaceTo;
                 } else break; // Unexpected token (likely EOF), so end.
             }
             
+          //  for (var statement: statements) System.out.println(statement.toString());
             return statements;
         }
         

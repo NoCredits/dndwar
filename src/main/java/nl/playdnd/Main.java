@@ -58,13 +58,13 @@ public class Main {
         
         System.out.println("");
         rygar.interpret();
-        nl.playdnd.global.Util.sleep(1);
+        nl.playdnd.global.Util.sleep(1000);
         System.out.println("");
         gandalf.interpret();
-        nl.playdnd.global.Util.sleep(1);
+        nl.playdnd.global.Util.sleep(1000);
         System.out.println("");
         rygar.interpret();
-        Util.sleep(1);
+        Util.sleep(1000);
         System.out.println("");
 
         gandalf.interpret();

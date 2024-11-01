@@ -39,7 +39,7 @@ public abstract class InlineValues {
     }
 
 
-    public abstract void move (); 
+    public abstract void move (int distance); 
 
     public abstract void faceTo (FaceTo faceTo); 
 }
