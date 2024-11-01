@@ -91,6 +91,8 @@ import nl.playdnd.global.FaceTo;
                     consume("then");
                     String label = consume(TokenType.WORD).text;
                     statements.add(new IfThenStatement(condition, label));
+                } else if (match("end")) {
+                    break;
                 } else break; // Unexpected token (likely EOF), so end.
             }
             
