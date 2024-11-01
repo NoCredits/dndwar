@@ -8,6 +8,8 @@ import nl.playdnd.dasic.expression.OperatorExpression;
 import nl.playdnd.dasic.expression.VariableExpression;
 import nl.playdnd.dasic.statement.AssignStatement;
 import nl.playdnd.dasic.statement.DelayStatement;
+import nl.playdnd.dasic.statement.EndGosubStatement;
+import nl.playdnd.dasic.statement.GosubStatement;
 import nl.playdnd.dasic.statement.GotoStatement;
 import nl.playdnd.dasic.statement.IfThenStatement;
 import nl.playdnd.dasic.statement.InputStatement;
@@ -109,6 +111,11 @@ import nl.playdnd.global.FaceTo;
                 } else if (match("goto")) {
                     statements.add(new GotoStatement(
                         consume(TokenType.WORD).text));
+                } else if (match("gosub")) {
+                    statements.add(new GosubStatement(
+                        consume(TokenType.WORD).text));
+                } else if (match("endgosub")) {
+                    statements.add(new EndGosubStatement());
                 } else if (match("if")) {
                     Expression condition = expression();
                     consume("then");
@@ -165,7 +172,8 @@ import nl.playdnd.global.FaceTo;
             
             // Keep building operator expressions as long as we have operators.
             while (match(TokenType.OPERATOR) ||
-                   match(TokenType.EQUALS)) {
+                   match(TokenType.EQUALS) ||
+                   match(TokenType.NOT) ) {
                 char operator = last(1).text.charAt(0);
                 Expression right = atomic();
                 expression = new OperatorExpression(expression, operator, right);

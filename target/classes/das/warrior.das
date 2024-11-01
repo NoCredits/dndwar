@@ -1,6 +1,8 @@
       west = "WEST"
 
       count = 2
+      if count ! 2 then end
+
       test = "hallo"
       t = {strength}
       h = {health} + 10

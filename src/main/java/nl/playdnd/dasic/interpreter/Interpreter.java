@@ -63,17 +63,18 @@ public class Interpreter {
 
         // Many tokens are a single character, like operators and ().
         //String charTokens = "\n=+-*/<>(){}";
-        String charTokens = "\n=+-*/<>()";
+        String charTokens = "\n=+-*/<>()!";
         TokenType[] tokenTypes = { TokenType.LINE, TokenType.EQUALS,
                 TokenType.OPERATOR, TokenType.OPERATOR, TokenType.OPERATOR,
                 TokenType.OPERATOR, TokenType.OPERATOR, TokenType.OPERATOR,
-                TokenType.LEFT_PAREN, TokenType.RIGHT_PAREN,
+                TokenType.LEFT_PAREN, TokenType.RIGHT_PAREN, TokenType.NOT
         };
         // Scan through the code one character at a time, building up the list
         // of tokens.
         for (int i = 0; i < source.length(); i++) {
             char c = source.charAt(i);
             switch (state) {
+                
                 case DEFAULT:
                     if (charTokens.indexOf(c) != -1) {
                         tokens.add(new Token(Character.toString(c),
@@ -93,7 +94,8 @@ public class Interpreter {
                         state = TokenizeState.INLINE;
                     }
                     break;
-
+                 
+                
                 case INLINE:
                     if (Character.isLetterOrDigit(c)) {
                         token += c;

@@ -31,6 +31,14 @@ import nl.playdnd.dasic.value.Value;
                     return new NumberValue(leftVal.toString().equals(
                                            rightVal.toString()) ? 1 : 0);
                 }
+            case '!':
+                if (leftVal instanceof NumberValue) {
+                    return new NumberValue((leftVal.toNumber() ==
+                                            rightVal.toNumber()) ? 0 : 1);
+                } else {
+                    return new NumberValue(leftVal.toString().equals(
+                                           rightVal.toString()) ? 0 : 1);
+                }
             case '+':
                 // Addition if the left argument is a number, otherwise do
                 // string concatenation.
