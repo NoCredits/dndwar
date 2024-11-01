@@ -4,6 +4,8 @@ import java.util.*;
 
 import lombok.Getter;
 import lombok.Setter;
+import nl.playdnd.arena.BattleMap;
+import nl.playdnd.character.InlineValues;
 import nl.playdnd.dasic.statement.Statement;
 import nl.playdnd.dasic.value.Value;
 
@@ -19,6 +21,9 @@ public class SourceCode {
 
     private int currentStatement; //pointer naar huidige statement
 
+    private InlineValues stats;
+
+
     public SourceCode() {
         variables = new HashMap<String, Value>();
         labels = new HashMap<String, Integer>();
@@ -28,5 +33,6 @@ public class SourceCode {
         this();
         this.source = source;
     }
+
 
 }

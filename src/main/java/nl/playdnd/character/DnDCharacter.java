@@ -13,7 +13,10 @@ import javax.swing.JPanel;
 
 import lombok.Getter;
 import lombok.Setter;
+import nl.playdnd.arena.BattleMap;
 import nl.playdnd.dasic.DasicAI;
+import nl.playdnd.global.FaceTo;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -44,10 +47,12 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
 
     protected String imageS, imageE, imageN, imageW;
 
+    public static BattleMap battleMap;
+
     private final Scanner keyboardInput = new Scanner(System.in);
 
     public DnDCharacter() {
-        setFace(FaceTo.SOUTH);
+        setFaceTo(FaceTo.SOUTH);
         setDasicAI(initDasic());
         setHealth((int) ((Math.random()) + 25));
     }
@@ -61,7 +66,7 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 String file = "";
-                switch (face) {
+                switch (faceTo) {
                     case EAST : file = getEastImagePath();
                     break;
                     case SOUTH : file = getSouthImagePath();
@@ -194,13 +199,36 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
         this.element = element;
     }
 
-    @Override
-    public DasicAI getDasic() {
-        return dasicAI;
-    }
 
     @Override
     public void interpret() {
         dasicAI.interpret(this);
+    }
+
+    @Override
+    public void move () {
+        System.out.println("facing "+getFaceTo());
+
+        Point newPos = getPosition();
+        if (getFaceTo() == FaceTo.NORTH) { 
+            newPos=new Point(getPosition().x,getPosition().y - 1);
+        }
+        if (getFaceTo() == FaceTo.EAST) { 
+            newPos=new Point(getPosition().x+1,getPosition().y );
+         }
+         if (getFaceTo() == FaceTo.SOUTH) { 
+            newPos=new Point(getPosition().x,getPosition().y + 1);
+        }
+        if (getFaceTo() == FaceTo.WEST) { 
+            newPos=new Point(getPosition().x - 1,getPosition().y );
+         }
+         if (battleMap.getCharacterAt(newPos.x, newPos.y) == null) { battleMap.moveCharacter(this,newPos);}
+     
+    }
+
+    @Override
+    public void faceTo (FaceTo faceTo) {
+        System.out.println("SET "+faceTo);
+        setFaceTo(faceTo) ;
     }
 }

@@ -73,6 +73,9 @@ public class BattleMap {
             System.out.println("Invalid move for " + character.getName());
         }
     }
+    public void moveCharacter(DnDEntity character, Point pos) {
+        moveCharacter(character, pos.x, pos.y);
+    }
 
     // Method to check if a position is within the map bounds
     private boolean isValidPosition(int x, int y) {

@@ -18,7 +18,7 @@ public interface DnDEntityMoveable extends DnDEntity {
 
     void levelUp();
 
-    DasicAI getDasic();
+    //DasicAI getDasic();
 
     DasicAI initDasic();
 

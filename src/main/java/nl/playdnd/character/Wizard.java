@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.GroupLayout.Alignment;
 
 import nl.playdnd.dasic.DasicAI;
+import nl.playdnd.global.FaceTo;
 
 public class Wizard extends DnDCharacter {
 
@@ -27,24 +28,16 @@ public class Wizard extends DnDCharacter {
         setStrength(strength);
         
         System.out.println("Wizard");
-        setFace(FaceTo.NORTH);
+        setFaceTo(FaceTo.NORTH);
 
         createElement();
-        interpret();
 
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        // element.move(30, 30);
     }
 
 
     @Override
     public DasicAI initDasic() {
-        dasicAI = new DasicAI("src/main/resources/das/wizard.das");
+        dasicAI = new DasicAI("src/main/resources/das/wizard.das", this);
         return dasicAI;
     }
 
@@ -74,6 +67,8 @@ public class Wizard extends DnDCharacter {
     public String getWestImagePath() {
         return "src/main/resources/wizardwest.png";    
     }
+
+
 
     
 

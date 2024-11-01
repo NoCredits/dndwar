@@ -11,6 +11,7 @@ import lombok.Getter;
 import lombok.Setter;
 import nl.playdnd.arena.ArenaGUI;
 import nl.playdnd.character.DnDEntityMoveable;
+import nl.playdnd.character.InlineValues;
 import nl.playdnd.character.DnDCharacter;
 import nl.playdnd.character.Vars;
 import nl.playdnd.dasic.interpreter.Interpreter;
@@ -115,12 +116,14 @@ public class DasicAI {
      * the interpreter such as the values of all of the variables and the
      * current statement.
      */
-    public DasicAI() {
+    public DasicAI(InlineValues stats) {
         sourceCode = new SourceCode();
+        sourceCode.setStats(stats);
     }
 
-    public DasicAI(String file) {
+    public DasicAI(String file, InlineValues stats) {
         sourceCode = new SourceCode(readFile(file));
+        sourceCode.setStats(stats);
     }
 
     public void interpret(nl.playdnd.character.InlineValues character) {

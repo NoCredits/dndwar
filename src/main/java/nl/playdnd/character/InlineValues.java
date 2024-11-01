@@ -2,6 +2,7 @@ package nl.playdnd.character;
 
 import lombok.Getter;
 import lombok.Setter;
+import nl.playdnd.global.FaceTo;
 
 @Setter
 @Getter
@@ -13,7 +14,7 @@ public abstract class InlineValues {
 
     protected String name;
 
-    protected FaceTo face;
+    protected FaceTo faceTo;
 
 
     public <O> Object getValue(String inline) {
@@ -24,6 +25,7 @@ public abstract class InlineValues {
         for (var field : fields) { 
             if (field.getName().equals(inline)) { 
                 try {
+                    //System.out.println(field.get(this));
                     value = field.get(this); //getValue of field
                 } catch (IllegalArgumentException e) {
                     e.printStackTrace();
@@ -36,4 +38,8 @@ public abstract class InlineValues {
         return value;
     }
 
+
+    public abstract void move (); 
+
+    public abstract void faceTo (FaceTo faceTo); 
 }

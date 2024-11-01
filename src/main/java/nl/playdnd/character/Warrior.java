@@ -7,6 +7,7 @@ import static nl.playdnd.global.Settings.*;
 import javax.swing.JPanel;
 
 import nl.playdnd.dasic.DasicAI;
+import nl.playdnd.global.FaceTo;
 
 public class Warrior extends DnDCharacter {
 
@@ -15,35 +16,16 @@ public class Warrior extends DnDCharacter {
         setHealth(health);
         setStrength(strength);
 
-        // JPanel element = new JPanel();
-        // element.setSize(TILESIZEX, TILESIZEY);
-        // element.setBackground(Color.red);
-        // setElement(element);
-
         createElement();
         System.out.println("Warrior");
-        interpret();
+        setFaceTo(FaceTo.SOUTH);
 
-        // element = Dasic.getArena().addElement(5, 5);
-        // element.setBackground(Color.red);
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        // element.move(10, 10);
     }
 
-    @Override
-    public DasicAI getDasic() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getDasic'");
-    }
 
     @Override
     public DasicAI initDasic() {
-        return new DasicAI("src/main/resources/das/warrior.das");
+        return new DasicAI("src/main/resources/das/warrior.das",this);
 
     }
 

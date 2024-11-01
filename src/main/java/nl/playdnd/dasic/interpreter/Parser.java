@@ -7,6 +7,8 @@ import nl.playdnd.dasic.expression.Expression;
 import nl.playdnd.dasic.expression.OperatorExpression;
 import nl.playdnd.dasic.expression.VariableExpression;
 import nl.playdnd.dasic.statement.AssignStatement;
+import nl.playdnd.dasic.statement.DelayStatement;
+import nl.playdnd.dasic.statement.FaceToStatement;
 import nl.playdnd.dasic.statement.GotoStatement;
 import nl.playdnd.dasic.statement.IfThenStatement;
 import nl.playdnd.dasic.statement.InputStatement;
@@ -18,6 +20,7 @@ import nl.playdnd.dasic.token.TokenType;
 import nl.playdnd.dasic.value.InlineValue;
 import nl.playdnd.dasic.value.NumberValue;
 import nl.playdnd.dasic.value.StringValue;
+import nl.playdnd.global.FaceTo;
 
 
     // Parsing -----------------------------------------------------------------
@@ -74,6 +77,12 @@ import nl.playdnd.dasic.value.StringValue;
                 } else if (match("input")) {
                     statements.add(new InputStatement(
                         consume(TokenType.WORD).text));
+                } else if (match("faceTo")) {
+                    statements.add(new FaceToStatement(
+                        consume(TokenType.WORD).text));
+                } else if (match("delay")) {
+                    statements.add(new DelayStatement(
+                        consume(TokenType.NUMBER).text));
                 } else if (match("goto")) {
                     statements.add(new GotoStatement(
                         consume(TokenType.WORD).text));
@@ -186,7 +195,8 @@ import nl.playdnd.dasic.value.StringValue;
                 if (val instanceof String) return new StringValue((String) val);
                 if (val instanceof Integer) return new NumberValue((int) val);
                 if (val instanceof Double) return new NumberValue((double) val);
-                
+                //if (val instanceof FaceTo) return new NumberValue( ((Enum<FaceTo>) val).ordinal());
+                if (val instanceof FaceTo) return new StringValue( ((Enum<FaceTo>) val).toString());
                 return new StringValue(null);
             }
 
