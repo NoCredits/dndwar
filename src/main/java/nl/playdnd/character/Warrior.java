@@ -18,7 +18,7 @@ public class Warrior extends DnDCharacter {
 
         createElement();
         System.out.println("Warrior");
-        setFaceTo(FaceTo.SOUTH);
+        faceTo(FaceTo.SOUTH);
 
     }
 

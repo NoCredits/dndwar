@@ -28,7 +28,7 @@ public class Wizard extends DnDCharacter {
         setStrength(strength);
         
         System.out.println("Wizard");
-        setFaceTo(FaceTo.NORTH);
+        faceTo(FaceTo.NORTH);
 
         createElement();
 

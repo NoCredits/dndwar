@@ -1,9 +1,10 @@
 package nl.playdnd;
 
+import nl.playdnd.arena.ArenaGUI;
 import nl.playdnd.arena.BattleMap;
+import nl.playdnd.arena.BattleMapScanner;
 import nl.playdnd.character.DnDCharacter;
-import nl.playdnd.character.Warrior;
-import nl.playdnd.character.Wizard;
+import nl.playdnd.character.*;
 
 import java.awt.*;
 
@@ -18,24 +19,33 @@ public class Main {
         DnDCharacter.battleMap = battleMap;
 
         // Dasic.getArena().addElement(3, 3, java.awt.Color);
-        Warrior rygar = new Warrior("Rygar", 10, 4);
-        
+        Warrior rygar = new Warrior("Rygar", 30, 4);
+        rygar.faceTo(FaceTo.EAST);
         System.out.println();
-        Wizard gandalf = new Wizard("Gandalf", 8, 2);
+        Wizard gandalf = new Wizard("Gandalf", 18, 2);
 
-        // Place characters on the map
         battleMap.placeCharacter(rygar, 0, 0); // Rygar starts at (0, 0)
         battleMap.placeCharacter(gandalf, 4, 4); // Gandalf starts at (4, 4)
 
+        Goblin gob1 = new Goblin();
+        Goblin gob2 = new Goblin();
+        Goblin gob3 = new Goblin();
+        battleMap.placeCharacter(gob1, 7, 5); // Rygar starts at (0, 0)
+        battleMap.placeCharacter(gob2, 8, 8); // Rygar starts at (0, 0)
+        battleMap.placeCharacter(gob3, 5, 1); // Rygar starts at (0, 0)
+
+        // Place characters on the map
+
         // Set their positions
-        rygar.setPosition(new Point(0, 0));
-        gandalf.setPosition(new Point(4, 4));
+//        rygar.setPosition(new Point(0, 0));
+ //       gandalf.setPosition(new Point(4, 4));
 
         // System.out.println("Initial Map:");
         // battleMap.displayMap();
+        ArenaGUI.getInstance().setVisible(true);
 
         int sx = 1;
-        while (sx++ < 2) {
+        while (sx++ < 1) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -43,7 +53,7 @@ public class Main {
                 e.printStackTrace();
             }
 
-            rygar.setFaceTo(FaceTo.EAST);
+            rygar.faceTo(FaceTo.EAST);
             // rygar.getElement().repaint();
             battleMap.moveCharacter(rygar, 5 + sx, 10);
             battleMap.moveCharacter(gandalf, 3 + sx, 6);
@@ -56,18 +66,19 @@ public class Main {
         }
 
         
-        System.out.println("");
-        rygar.interpret();
-        nl.playdnd.global.Util.sleep(1000);
-        System.out.println("");
-        gandalf.interpret();
-        nl.playdnd.global.Util.sleep(1000);
-        System.out.println("");
-        rygar.interpret();
-        Util.sleep(1000);
-        System.out.println("");
+        // System.out.println("");
+        // rygar.interpret();
+        // nl.playdnd.global.Util.sleep(1000);
+        // System.out.println("");
+        // gandalf.interpret();
+        // nl.playdnd.global.Util.sleep(1000);
+        // System.out.println("");
+        // rygar.interpret();
+        // Util.sleep(1000);
+        // System.out.println("");
 
         gandalf.interpret();
+        new BattleMapScanner(battleMap, gandalf);
 
     }
 

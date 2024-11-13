@@ -16,6 +16,8 @@ public abstract class InlineValues {
 
     protected FaceTo faceTo;
 
+    protected int inCombat;
+
 
     public <O> Object getValue(String inline) {
 
@@ -42,4 +44,14 @@ public abstract class InlineValues {
     public abstract void move (int distance); 
 
     public abstract void faceTo (FaceTo faceTo); 
+
+    public int getFaceArc() {
+        switch (faceTo) {
+            case NORTH : return 0;
+            case EAST : return 90;
+            case SOUTH : return 180;
+            case WEST  : return 270;
+        }
+        return 0;
+    }
 }

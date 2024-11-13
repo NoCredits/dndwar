@@ -1,6 +1,7 @@
 package nl.playdnd.character;
 
 import nl.playdnd.dasic.DasicAI;
+import nl.playdnd.global.FaceTo;
 
 /**
  * Hobgoblin.java
@@ -8,23 +9,26 @@ import nl.playdnd.dasic.DasicAI;
  * A hobgoblin is intended to be a weak monster. It is also the Foolish
  * Consistency of Little Minds.
  */
-class Hobgoblin extends DnDCharacter {
+public class Goblin extends DnDCharacter {
 
   
     private final int HEALTH_MULTIPLIER = 10;
 
-    public Hobgoblin() {
-        name = "Hobgoblin";
+    public Goblin() {
+        name = "Goblin";
         this.myWeapon = new Weapon("Cast Iron Skillet", 6);
         this.myArmor = new Armor("Trash Can Lid for a Breastplate, Suspended with Bungee Cords", 6);
         setHealth((int) ((Math.random() * HEALTH_MULTIPLIER) + 5));
         
+        faceTo(FaceTo.SOUTH);
+
+        createElement();
+
     }
 
     @Override
     public DasicAI initDasic() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'initDasic'");
+       return new DasicAI(null);
     }
 
     @Override
@@ -35,25 +39,18 @@ class Hobgoblin extends DnDCharacter {
 
     @Override
     public String getNorthImagePath() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getNorthImagePath'");
+        return "src/main/resources/eye.png";  
     }
 
     @Override
     public String getEastImagePath() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getEastImagePath'");
-    }
+        return "src/main/resources/eye.png";      }
 
     @Override
     public String getSouthImagePath() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getSouthImagePath'");
-    }
+        return "src/main/resources/eye.png";      }
 
     @Override
     public String getWestImagePath() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getWestImagePath'");
-    }
+        return "src/main/resources/eye.png";      }
 }

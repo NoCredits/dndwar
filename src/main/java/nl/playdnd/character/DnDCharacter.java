@@ -5,6 +5,7 @@ import static nl.playdnd.global.Settings.TILESIZEY;
 
 import java.awt.Color;
 import java.awt.Composite;
+import java.awt.Dimension;
 import java.awt.AlphaComposite;
 import java.awt.Point;
 import java.util.Scanner;
@@ -28,7 +29,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.LinearGradientPaint;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -59,12 +62,73 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
     }
 
 
+    public class JPanel1 extends JPanel {        
+    
+        public JPanel1() {
+            setBackground(new Color(100,100,100,50));
+        }
+        
+        public void paintComponent(Graphics g) {
+             // The following statement ensures that
+             // the background color will be applied
+             // as well as other preparations for 
+             // doing graphics.
+     
+             super.paintComponent(g);
+             // If you have other graphics
+             // code, add it here.
+
+             String file = "";
+             switch (faceTo) {
+                 case EAST : file = getEastImagePath();
+                 break;
+                 case SOUTH : file = getSouthImagePath();
+                 break;
+                 case WEST : file = getWestImagePath();
+                 break;
+                 default : file = getNorthImagePath();
+             }
+            // BufferedImage image = null;
+             BufferedImage image = new BufferedImage(TILESIZEX, TILESIZEY,BufferedImage.TYPE_INT_ARGB);
+             try {
+                 image = ImageIO.read(new File(file));
+             } catch (IOException e) {
+                 // TODO Auto-generated catch block
+                 e.printStackTrace();
+             }
+   
+             Graphics2D g2 = (Graphics2D) g.create();
+             //g2.setBackground(new Color(0,0,0,0));
+//                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,  RenderingHints.VALUE_ANTIALIAS_ON);
+
+
+//              AlphaComposite ac = java.awt.AlphaComposite.getInstance(AlphaComposite.SRC_ATOP,0.5F);
+             //g2.setComposite(ac);
+            // g2.rotate(Math.toRadians(0), TILESIZEX / 2, TILESIZEX / 2);
+             g2.drawImage(image, 0, 0, TILESIZEX, TILESIZEY, null);
+          
+             g2.dispose();
+
+       }
+    
+    }
+
     public void createElement() {
+
+        JPanel1 element = null;
+        element = new JPanel1();
+        element.setSize(TILESIZEX, TILESIZEY);
+        //element.setBackground(new Color(0,0,0,1));
+        setElement(element);
+
+    }
+    public void createElementOLD() {
 
         JPanel element = null;
         element = new JPanel() {
             @Override
             protected void paintComponent(Graphics g) {
+                g.setColor(new Color(0,0,0,0));
                 super.paintComponent(g);
                 String file = "";
                 switch (faceTo) {
@@ -76,7 +140,8 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
                     break;
                     default : file = getNorthImagePath();
                 }
-                BufferedImage image = null;
+               // BufferedImage image = null;
+                BufferedImage image = new BufferedImage(TILESIZEX, TILESIZEY,BufferedImage.TYPE_INT_ARGB);
                 try {
                     image = ImageIO.read(new File(file));
                 } catch (IOException e) {
@@ -84,17 +149,17 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
                     e.printStackTrace();
                 }
       
-                Graphics2D g2 = (Graphics2D) g;
-                Rectangle square = new Rectangle(0, 0, TILESIZEX, TILESIZEY);
+                Graphics2D g2 = (Graphics2D) g.create();
+                //g2.setBackground(new Color(0,0,0,0));
+//                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,  RenderingHints.VALUE_ANTIALIAS_ON);
 
-                g2.draw(square);
-                g2.rotate(Math.toRadians(0), TILESIZEX / 2, TILESIZEX / 2);
-                // Composite originalComposite = g2.getComposite();
-                // AlphaComposite alphaComposite =  AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f);
-                // g2.setComposite(alphaComposite);
-                g2.drawImage(image, 0, 0, TILESIZEX, TILESIZEY, this);
+
+  //              AlphaComposite ac = java.awt.AlphaComposite.getInstance(AlphaComposite.SRC_ATOP,0.5F);
+                //g2.setComposite(ac);
+               // g2.rotate(Math.toRadians(0), TILESIZEX / 2, TILESIZEX / 2);
+                g2.drawImage(image, 0, 0, TILESIZEX, TILESIZEY, null);
+             
                 g2.dispose();
-                // g2.drawImage(image, -0, -0,TILESIZEX,TILESIZEY,null);
             }
         };
 

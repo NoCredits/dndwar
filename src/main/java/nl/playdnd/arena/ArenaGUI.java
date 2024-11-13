@@ -47,14 +47,18 @@ public class ArenaGUI {
 
     public ArenaGUI() {
         window = new JFrame("Welkom");
+        window.setUndecorated(true);
+        window.setBackground(new Color(0,0,0,200));
+
         window.getContentPane().setLayout(new BoxLayout(window.getContentPane(), BoxLayout.X_AXIS));
         
         window.setSize(1200, 800);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        window.setBackground(Color.white);
+    //    window.setBackground(Color.white);
         arena = new JLayeredPane();
-        
+        arena.setBackground(new Color(0,0,0,0));
+
         arena.setLocation(new Point(0, 0));
         arena.setPreferredSize(new Dimension(800, 800));
         // arena.setBackground(Color.YELLOW);
@@ -77,7 +81,7 @@ public class ArenaGUI {
         scoreboard.add(turns);
         window.add(scoreboard);
 
-        window.setVisible(true);
+    //    window.setVisible(true);
     }
 
     public  void setVisible(boolean visible) {
@@ -88,9 +92,11 @@ public class ArenaGUI {
     public JPanel addElement(int x, int y, JPanel element) {
 
         arena.add(element, JLayeredPane.MODAL_LAYER);
+        //window.add(element, JLayeredPane.DRAG_LAYER);
         // element.setSize(20, 20);
         element.setLocation(new Point(x * (TILESIZEX + TILESPACINGX), y * (TILESIZEY + TILESPACINGY)));
-       // addFog(x, y);
+        element .repaint();
+       //addFog(x, y);
         return element;
     }
 
@@ -108,11 +114,7 @@ public class ArenaGUI {
     }
 
 
-    /**
-     * Adds an element to the GUI that represents a robot.
-     * 
-     * @return The component that will represent a robot.
-     */
+
     public JPanel addElement(int x, int y, java.awt.Color color) {
         JPanel element = new JPanel();
 
@@ -128,21 +130,14 @@ public class ArenaGUI {
 
         arena.add(element, JLayeredPane.DEFAULT_LAYER);
         element.setSize(TILESIZEX, TILESIZEY);
-        element.setBackground(EMPTYTILECOLOR);
+        //element.setBackground(EMPTYTILECOLOR);
+        element.setBackground(new Color(30,30,30,150));
+
         element.setLocation(new Point(x * (TILESIZEX + TILESPACINGX), y * (TILESIZEY + TILESPACINGY)));
 
         return element;
     }
 
-
-    /**
-     * Adds an info box to the GUI that will be used to display the information of a
-     * robot.
-     * 
-     * @param robotName Name of the robot.
-     * @return The JTextArea which contains the dynamic information that can be
-     *         changed.
-     */
     public JTextArea addInfoToScoreboard(String title) {
         JPanel infoArea = new JPanel();
         infoArea.setPreferredSize(new Dimension(200, 100));
@@ -156,40 +151,18 @@ public class ArenaGUI {
         scoreboard.add(infoArea);
         return info;
     }
-
-    /**
-     * Removes the given robot or rocket from the GUI.
-     * 
-     * @param element The reference JPanel object.
-     */
     public void removeElement(JPanel element) {
         this.arena.remove(element);
     }
-
-    /**
-     * Removes the given info box of the robot from the GUI.
-     * 
-     * @param info the reference JTextArea object.
-     */
     public void removeElement(JTextArea info) {
         Container infoArea = info.getParent();
         infoArea.setVisible(false);
         this.arena.remove(infoArea);
     }
-
-    /**
-     * Set the turn number in the scoreboard.
-     * 
-     * @param turn
-     */
     public void updateTurns(int turn) {
         this.turns.setText(String.format("turn: %d / 5000", turn));
     }
 
-    /**
-     * The GUI function that opens a popup window declaring the winner robot of the
-     * battle.
-     */
     public void declareWinner(String nameOfTheWinner) {
         JTextArea winner = new JTextArea(String.format("WINNER: %s", nameOfTheWinner));
         winner.setPreferredSize(new Dimension(200, 100));
