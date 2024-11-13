@@ -20,7 +20,7 @@ public class Main {
 
         // Dasic.getArena().addElement(3, 3, java.awt.Color);
         Warrior rygar = new Warrior("Rygar", 30, 4);
-        rygar.faceTo(FaceTo.EAST);
+        rygar.stats.faceTo(FaceTo.EAST);
         System.out.println();
         Wizard gandalf = new Wizard("Gandalf", 18, 2);
 
@@ -30,9 +30,11 @@ public class Main {
         Goblin gob1 = new Goblin();
         Goblin gob2 = new Goblin();
         Goblin gob3 = new Goblin();
+        Goblin gob4 = new Goblin();
         battleMap.placeCharacter(gob1, 7, 5); // Rygar starts at (0, 0)
         battleMap.placeCharacter(gob2, 8, 8); // Rygar starts at (0, 0)
         battleMap.placeCharacter(gob3, 5, 1); // Rygar starts at (0, 0)
+        battleMap.placeCharacter(gob4, 6, 1); // Rygar starts at (0, 0)
 
         // Place characters on the map
 
@@ -53,7 +55,7 @@ public class Main {
                 e.printStackTrace();
             }
 
-            rygar.faceTo(FaceTo.EAST);
+            rygar.stats.faceTo(FaceTo.EAST);
             // rygar.getElement().repaint();
             battleMap.moveCharacter(rygar, 5 + sx, 10);
             battleMap.moveCharacter(gandalf, 3 + sx, 6);
@@ -80,6 +82,7 @@ public class Main {
         gandalf.interpret();
         new BattleMapScanner(battleMap, gandalf);
 
+        System.out.println(rygar.stats.getFaceTo());
     }
 
 

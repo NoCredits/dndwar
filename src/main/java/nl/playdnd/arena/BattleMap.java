@@ -20,7 +20,7 @@ public class BattleMap {
     private final int width;
     private final int height;
     private DnDEntity[][] map; // A grid to hold characters' MAP positions
-    private JPanel[][] elements; // A grid to hold characters' SCREEN positions
+    //private JPanel[][] elements; // A grid to hold characters' SCREEN positions
     private List<DnDCharacter> chars;
     
     // Constructor to initialize the map with a given width and height
@@ -28,12 +28,10 @@ public class BattleMap {
         this.width = width;
         this.height = height;
         this.map = new DnDEntity[width][height]; // Create an empty grid
-        this.elements = new JPanel[width][height];
         this.chars = new ArrayList<DnDCharacter>();
         for (int i = 0; i < width; i++) {
             for (int j = 0; j < height; j++) {
                 ArenaGUI.getInstance().addTile(i, j);
-
             }
         }
         
@@ -44,8 +42,9 @@ public class BattleMap {
         if (isValidPosition(x, y)) {
             map[x][y] = character;
             System.out.println(character.getName() + " is placed at (" + x + ", " + y + ").");
-            elements[x][y] = ArenaGUI.getInstance().addElement(x, y, character.getElement());
-            character.setElement(elements[x][y]);
+            JPanel element = ArenaGUI.getInstance().addElement(x, y, character.getElement());
+            //elements[x][y] = ArenaGUI.getInstance().addElement(x, y, character.getElement());
+            character.setElement(element);
             character.setPosition(new Point(x,y));
             chars.add(character);
 
@@ -56,7 +55,7 @@ public class BattleMap {
     }
 
     // Method to move a character to a new position
-    public void moveCharacter(DnDEntity character, int oldX, int oldY, int newX, int newY) {
+    public void moveCharacter(DnDCharacter character, int oldX, int oldY, int newX, int newY) {
         if (isValidPosition(newX, newY) && map[oldX][oldY] == character) {
             map[oldX][oldY] = null; // Remove character from the old position
             character.getElement().setLocation(new Point(newX * (TILESIZEX + TILESPACINGX), newY * (TILESIZEY + TILESPACINGY)));
@@ -69,7 +68,7 @@ public class BattleMap {
     }
 
     // Method to move a character to a new position
-    public void moveCharacter(DnDEntity character, int newX, int newY) {
+    public void moveCharacter(DnDCharacter character, int newX, int newY) {
         Point oldPos=new Point(character.getPosition().x,character.getPosition().y);
         if (isValidPosition(newX, newY) && map[oldPos.x][oldPos.y] == character) {
             map[oldPos.x][oldPos.y] = null; // Remove character from the old
@@ -85,7 +84,7 @@ public class BattleMap {
             System.out.println("Invalid move for " + character.getName());
         }
     }
-    public void moveCharacter(DnDEntity character, Point pos) {
+    public void moveCharacter(DnDCharacter character, Point pos) {
         moveCharacter(character, pos.x, pos.y);
     }
 

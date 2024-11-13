@@ -116,21 +116,21 @@ public class DasicAI {
      * the interpreter such as the values of all of the variables and the
      * current statement.
      */
-    public DasicAI(InlineValues stats) {
-        sourceCode = new SourceCode();
-        sourceCode.setStats(stats);
+    public DasicAI(DnDCharacter character) {
+        sourceCode = new SourceCode(character);
+        sourceCode.setStats(character.stats);
     }
 
-    public DasicAI(String file, InlineValues stats) {
-        sourceCode = new SourceCode(readFile(file));
-        sourceCode.setStats(stats);
+    public DasicAI(String file, DnDCharacter character) {
+        sourceCode = new SourceCode(character,readFile(file));
+        sourceCode.setStats(character.stats);
     }
 
-    public void interpret(nl.playdnd.character.InlineValues character) {
+    public void interpret(DnDCharacter character) {
         Interpreter.interpret(character, sourceCode);
     }
 
-    public void interpret(nl.playdnd.character.InlineValues character, String source) {
+    public void interpret(DnDCharacter character, String source) {
         sourceCode.setSource(source);
         Interpreter.interpret(character, sourceCode);
 

@@ -24,11 +24,11 @@ public class Wizard extends DnDCharacter {
 
     public Wizard(String name, int health, int strength) {
         setName(name);
-        setHealth(health);
-        setStrength(strength);
+        stats.setHealth(health);
+        stats.setStrength(strength);
         
         System.out.println("Wizard");
-        faceTo(FaceTo.NORTH);
+        stats.faceTo(FaceTo.NORTH);
 
         createElement();
 

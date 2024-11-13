@@ -16,7 +16,7 @@ public class FaceToStatement implements Statement {
 
     @Override
     public void execute(SourceCode sourceCode) {
-        InlineValues stats = sourceCode.getStats();
+        InlineValues stats = sourceCode.character.getStats();
 
         System.out.println("setFaceTo "+expression.evaluate(sourceCode).toString()  );
        stats.setFaceTo(FaceTo.getFace(expression.evaluate(sourceCode).toString()));

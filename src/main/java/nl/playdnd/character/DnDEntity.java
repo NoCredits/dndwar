@@ -10,10 +10,10 @@ public interface DnDEntity {
 
     Point getPosition(); // Return [x, y] coordinates
 
-    void setPosition(Point pos);
+    //void setPosition(Point pos);
 
     JPanel getElement();
 
-    void setElement(JPanel element);
+    //void setElement(JPanel element);
 
 }

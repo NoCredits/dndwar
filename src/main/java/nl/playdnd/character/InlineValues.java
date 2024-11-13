@@ -6,7 +6,7 @@ import nl.playdnd.global.FaceTo;
 
 @Setter
 @Getter
-public abstract class InlineValues {
+public class InlineValues {
 
     protected int health;
 
@@ -41,9 +41,12 @@ public abstract class InlineValues {
     }
 
 
-    public abstract void move (int distance); 
+    public void move (int distance) {}; 
 
-    public abstract void faceTo (FaceTo faceTo); 
+    public void faceTo (FaceTo faceTo) {
+        System.out.println("SET "+faceTo);
+        setFaceTo(faceTo) ;
+    }
 
     public int getFaceArc() {
         switch (faceTo) {

@@ -17,10 +17,10 @@ public class MoveStatement implements Statement {
 
     @Override
     public void execute(SourceCode sourceCode) {
-        InlineValues stats = sourceCode.getStats();
+        InlineValues stats = sourceCode.character.getStats();
         System.out.println(stats.getName() + " moves "+expression.evaluate(sourceCode).toString() );
-
-        stats.move((int) (double) Double.valueOf(expression.evaluate(sourceCode).toString()));
+        System.out.println(stats.getName());
+        sourceCode.character.move((int) (double) Double.valueOf(expression.evaluate(sourceCode).toString()));
 
     }
 

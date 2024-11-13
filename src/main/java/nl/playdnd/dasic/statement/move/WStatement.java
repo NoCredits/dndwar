@@ -30,10 +30,11 @@ public class WStatement implements Statement {
 
     @Override
     public void execute(SourceCode sourceCode) {
-        InlineValues stats = sourceCode.getStats();
+        InlineValues stats = sourceCode.character.getStats();
         stats.faceTo(FaceTo.WEST);
         System.out.println(stats.getName() + " faces "+stats.getFaceTo()+" moves "+expression.evaluate(sourceCode).toString() );
-        stats.move((int) (double) Double.valueOf(expression.evaluate(sourceCode).toString()));
+        //stats.move((int) (double) Double.valueOf(expression.evaluate(sourceCode).toString()));
+        sourceCode.character.move((int) (double) Double.valueOf(expression.evaluate(sourceCode).toString()));
 
     }
 

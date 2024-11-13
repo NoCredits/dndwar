@@ -15,21 +15,17 @@ public class Goblin extends DnDCharacter {
     private final int HEALTH_MULTIPLIER = 10;
 
     public Goblin() {
-        name = "Goblin";
+        stats.name = "Goblin";
         this.myWeapon = new Weapon("Cast Iron Skillet", 6);
         this.myArmor = new Armor("Trash Can Lid for a Breastplate, Suspended with Bungee Cords", 6);
-        setHealth((int) ((Math.random() * HEALTH_MULTIPLIER) + 5));
+        stats.setHealth((int) ((Math.random() * HEALTH_MULTIPLIER) + 5));
         
-        faceTo(FaceTo.SOUTH);
+        stats.faceTo(FaceTo.SOUTH);
 
         createElement();
 
     }
 
-    @Override
-    public DasicAI initDasic() {
-       return new DasicAI(null);
-    }
 
     @Override
     public void interpret() {

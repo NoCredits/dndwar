@@ -8,7 +8,7 @@ import nl.playdnd.character.DnDCharacter;
 import nl.playdnd.character.DnDEntity;
 
 public class BattleMapScanner {
-    private static final int VISION_RADIUS = 5; // Max vision range
+    private static final int VISION_RADIUS = 15; // Max vision range
     private static final int FOV_ARC = 90;      // Field of view (in degrees)
 
     public BattleMapScanner (BattleMap map, DnDCharacter player) {
@@ -23,16 +23,16 @@ public class BattleMapScanner {
         // Perform scan for each player
         
             List<Point> detectedEnemies = scanForEnemies(player, enemies, VISION_RADIUS, mapGrid);
-            System.out.println("Player at " + player.getPosition() + " facing " + player.getFaceTo() + "° detects enemies at: " + detectedEnemies);
+            System.out.println("Player at " + player.getPosition() + " facing " + player.stats.getFaceTo() + "° detects enemies at: " + detectedEnemies);
         
     }
 
     private static List<Point> scanForEnemies(DnDCharacter player, List<DnDCharacter> enemies, int visionRadius, DnDEntity[][] mapGrid) {
                     List<Point> detectedEnemies = new ArrayList<>();
             
-                    for (DnDEntity enemy : enemies) {
+                    for (DnDCharacter enemy : enemies) {
                 // Calculate distance between player and enemy
-                System.out.println(enemy.getPosition() + enemy.getName()+" "+player.getFaceArc() + " "+player.getFaceTo());
+                System.out.println(enemy.getPosition() + enemy.getName()+" "+enemy.stats.getFaceArc() + " "+enemy.stats.getFaceTo());
                 double distance = player.getPosition().distance(enemy.getPosition());
     
                 // Check if enemy is within the vision radius
@@ -40,7 +40,7 @@ public class BattleMapScanner {
                     // Calculate the angle to the enemy and check if it's within the field of view (FOV)
                     double angleToEnemy = calculateAngle(player.getPosition(), enemy.getPosition());
                     
-                    if (isWithinArc(player.getFaceArc(), angleToEnemy, FOV_ARC)) {
+                    if (isWithinArc(player.stats.getFaceArc(), angleToEnemy, FOV_ARC)) {
                         // Check line of sight (LOS)
                         if (lineOfSight(player.getPosition(), enemy.getPosition(), mapGrid)) {
                         detectedEnemies.add(enemy.getPosition());
@@ -60,10 +60,10 @@ public class BattleMapScanner {
             int err = dx - dy;
     
          while (true) {
-            //     // Check if we hit an obstacle
-            //     if (mapGrid[y1][x1] == 0) {
-            //     return false; // Line of sight is blocked
-            // }
+            // Check if we hit an obstacle
+            if (mapGrid[y1][x1] != null &&   mapGrid[y1][x1].getName().equals("Wall")) {
+                return false; // Line of sight is blocked
+            }
 
             // Reached the endpoint
             if (x1 == x2 && y1 == y2) {

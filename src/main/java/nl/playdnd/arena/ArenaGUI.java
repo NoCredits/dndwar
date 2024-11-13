@@ -47,8 +47,8 @@ public class ArenaGUI {
 
     public ArenaGUI() {
         window = new JFrame("Welkom");
-        window.setUndecorated(true);
-        window.setBackground(new Color(0,0,0,200));
+//        window.setUndecorated(true);
+//        window.setBackground(new Color(0,0,0,200));
 
         window.getContentPane().setLayout(new BoxLayout(window.getContentPane(), BoxLayout.X_AXIS));
         

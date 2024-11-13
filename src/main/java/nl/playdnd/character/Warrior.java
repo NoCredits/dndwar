@@ -13,12 +13,12 @@ public class Warrior extends DnDCharacter {
 
     public Warrior(String name, int health, int strength) {
         setName(name);
-        setHealth(health);
-        setStrength(strength);
+        stats.setHealth(health);
+        stats.setStrength(strength);
 
         createElement();
         System.out.println("Warrior");
-        faceTo(FaceTo.SOUTH);
+        stats.faceTo(FaceTo.SOUTH);
 
     }
 

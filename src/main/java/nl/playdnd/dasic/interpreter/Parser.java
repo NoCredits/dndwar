@@ -2,6 +2,7 @@ package nl.playdnd.dasic.interpreter;
 
 import java.util.*;
 
+import nl.playdnd.character.DnDCharacter;
 import nl.playdnd.character.InlineValues;
 import nl.playdnd.dasic.expression.Expression;
 import nl.playdnd.dasic.expression.OperatorExpression;
@@ -45,10 +46,10 @@ import nl.playdnd.global.FaceTo;
                 
         private final List<Token> tokens;
         private int position;
-        private InlineValues inlineValues;
+        private DnDCharacter character;
 
-        public Parser(List<Token> tokens, InlineValues inlineValues) {
-            this.inlineValues = inlineValues;
+        public Parser(List<Token> tokens, DnDCharacter character) {
+            this.character = character;
             this.tokens = tokens;
             position = 0;
         }
@@ -222,7 +223,7 @@ import nl.playdnd.global.FaceTo;
             else if (match(TokenType.INLINE)) {
                 // The contents of a curlybraced is an inline variable
                 //expression();  //consumes the expression
-                var val = inlineValues.getValue( (last(1).text));
+                var val = character.stats.getValue( (last(1).text));
                 //System.out.println("val= "+val);
                 //consume(TokenType.RIGHT_CURLYBRACE);
                 

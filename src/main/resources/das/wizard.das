@@ -9,12 +9,13 @@
       ' stop looping if we're done
       E 
       S 3
-      N 1
-      S
+      E 
+      S 1
+      N
       gosub moi
       print "Na gosub"
-      combat = {inCombat}
-      print combat
+      'combat = {inCombat}
+      'print combat
       if combat = 0 then combat
 
       

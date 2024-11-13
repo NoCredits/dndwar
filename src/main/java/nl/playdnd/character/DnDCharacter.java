@@ -16,6 +16,7 @@ import lombok.Getter;
 import lombok.Setter;
 import nl.playdnd.arena.BattleMap;
 import nl.playdnd.dasic.DasicAI;
+import nl.playdnd.dasic.interpreter.SourceCode;
 import nl.playdnd.global.FaceTo;
 import nl.playdnd.global.Util;
 
@@ -38,7 +39,8 @@ import java.io.IOException;
 
 @Setter
 @Getter
-public abstract class DnDCharacter extends InlineValues implements DnDEntityMoveable {
+//public abstract class DnDCharacter extends InlineValues implements DnDEntityMoveable {
+    public abstract class DnDCharacter implements DnDEntityMoveable {
 
     protected Armor myArmor;
     private int level;
@@ -49,6 +51,10 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
     protected java.awt.Color color;
     protected DasicAI dasicAI;
 
+    private SourceCode sourceCode;
+    
+    public InlineValues stats;
+
     protected String imageS, imageE, imageN, imageW;
 
     public static BattleMap battleMap;
@@ -56,9 +62,11 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
     private final Scanner keyboardInput = new Scanner(System.in);
 
     public DnDCharacter() {
-        setFaceTo(FaceTo.SOUTH);
+        sourceCode = new SourceCode(this);
+        stats = sourceCode.stats;
+        stats.setFaceTo(FaceTo.SOUTH);
         setDasicAI(initDasic());
-        setHealth((int) ((Math.random()) + 25));
+        stats.setHealth((int) ((Math.random()) + 25));
     }
 
 
@@ -79,7 +87,7 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
              // code, add it here.
 
              String file = "";
-             switch (faceTo) {
+             switch (stats.faceTo) {
                  case EAST : file = getEastImagePath();
                  break;
                  case SOUTH : file = getSouthImagePath();
@@ -122,53 +130,6 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
         setElement(element);
 
     }
-    public void createElementOLD() {
-
-        JPanel element = null;
-        element = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                g.setColor(new Color(0,0,0,0));
-                super.paintComponent(g);
-                String file = "";
-                switch (faceTo) {
-                    case EAST : file = getEastImagePath();
-                    break;
-                    case SOUTH : file = getSouthImagePath();
-                    break;
-                    case WEST : file = getWestImagePath();
-                    break;
-                    default : file = getNorthImagePath();
-                }
-               // BufferedImage image = null;
-                BufferedImage image = new BufferedImage(TILESIZEX, TILESIZEY,BufferedImage.TYPE_INT_ARGB);
-                try {
-                    image = ImageIO.read(new File(file));
-                } catch (IOException e) {
-                    // TODO Auto-generated catch block
-                    e.printStackTrace();
-                }
-      
-                Graphics2D g2 = (Graphics2D) g.create();
-                //g2.setBackground(new Color(0,0,0,0));
-//                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,  RenderingHints.VALUE_ANTIALIAS_ON);
-
-
-  //              AlphaComposite ac = java.awt.AlphaComposite.getInstance(AlphaComposite.SRC_ATOP,0.5F);
-                //g2.setComposite(ac);
-               // g2.rotate(Math.toRadians(0), TILESIZEX / 2, TILESIZEX / 2);
-                g2.drawImage(image, 0, 0, TILESIZEX, TILESIZEY, null);
-             
-                g2.dispose();
-            }
-        };
-
-        element.setSize(TILESIZEX, TILESIZEY);
-        //element.setBackground(new Color(0,0,0,1));
-        setElement(element);
-    }
-
-
 
     @Override
     public int attack() {
@@ -185,7 +146,7 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
     @Override
     public void printStats() {
         System.out.println("Name: " + getName() +
-                "\nHealth: " + getHealth() +
+                "\nHealth: " + stats.getHealth() +
                 "\nWeapon: " + myWeapon.getName() +
                 "\nArmor: " + myArmor.getName());
     }
@@ -200,11 +161,11 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
 
     @Override
     public String getName() {
-        return name;
+        return stats.name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        stats.name = name;
     }
 
     public int getLevel() {
@@ -217,32 +178,32 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
 
     @Override
     public void attack(DnDEntityMoveable enemy) {
-        System.out.println(this.name + " attacks " + enemy.getName() + "!");
-        int damage = getStrength() / 2;
+        System.out.println(stats.name + " attacks " + enemy.getName() + "!");
+        int damage = stats.getStrength() / 2;
         enemy.takeDamage(damage);
     }
 
     @Override
     public void takeDamage(int damage) {
-        setHealth(getHealth() - damage);
-        if (getHealth() <= 0) {
-            System.out.println(this.name + " has fallen!");
+        stats.setHealth(stats.getHealth() - damage);
+        if (stats.getHealth() <= 0) {
+            System.out.println(stats.name + " has fallen!");
         } else {
-            System.out.println(this.name + " has " + getHealth() + " hit points remaining.");
+            System.out.println(stats.name + " has " + stats.getHealth() + " hit points remaining.");
         }
     }
 
     @Override
     public void heal(int healAmount) {
-        setHealth(getHealth() + healAmount);
-        System.out.println(this.name + " heals for " + healAmount + " hit points!");
+        stats.setHealth(stats.getHealth() + healAmount);
+        System.out.println(stats.name + " heals for " + healAmount + " hit points!");
     }
 
     @Override
     public void levelUp() {
         this.level++;
-        setHealth(getHealth() + 10);
-        System.out.println(this.name + " has leveled up to level " + this.level + "!");
+        stats.setHealth(stats.getHealth() + 10);
+        System.out.println(stats.name + " has leveled up to level " + this.level + "!");
     }
 
     @Override
@@ -250,7 +211,6 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
         return position;
     }
 
-    @Override
     public void setPosition(Point position) {
         this.position = position;
     }
@@ -260,7 +220,6 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
         return element;
     }
 
-    @Override
     public void setElement(JPanel element) {
         this.element = element;
     }
@@ -271,35 +230,36 @@ public abstract class DnDCharacter extends InlineValues implements DnDEntityMove
         dasicAI.interpret(this);
     }
 
-    @Override
+
     public void move (int distance) {
         
-        System.out.println("facing "+getFaceTo());
+        System.out.println("facing "+stats.getFaceTo());
 
         for (int d = 0; d<distance; d++) {
 
             Point newPos = getPosition();
-            if (getFaceTo() == FaceTo.NORTH) { 
+            if (stats.getFaceTo() == FaceTo.NORTH) { 
                 newPos=new Point(getPosition().x,getPosition().y - 1);
             }
-            if (getFaceTo() == FaceTo.EAST) { 
+            if (stats.getFaceTo() == FaceTo.EAST) { 
                 newPos=new Point(getPosition().x+1,getPosition().y );
              }
-             if (getFaceTo() == FaceTo.SOUTH) { 
+             if (stats.getFaceTo() == FaceTo.SOUTH) { 
                 newPos=new Point(getPosition().x,getPosition().y + 1);
             }
-            if (getFaceTo() == FaceTo.WEST) { 
+            if (stats.getFaceTo() == FaceTo.WEST) { 
                 newPos=new Point(getPosition().x - 1,getPosition().y );
              }
              if (battleMap.getCharacterAt(newPos.x, newPos.y) == null) { battleMap.moveCharacter(this,newPos);}
-             Util.sleep(500);
+             Util.sleep(1500);
         }
      
     }
 
     @Override
-    public void faceTo (FaceTo faceTo) {
-        System.out.println("SET "+faceTo);
-        setFaceTo(faceTo) ;
+    public DasicAI initDasic() {
+       return new DasicAI(this);
     }
+
+    
 }
